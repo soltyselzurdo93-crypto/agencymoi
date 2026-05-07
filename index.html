@@ -6,6 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/svg+xml" href="public/icons/favicon.svg">
     <link rel="shortcut icon" href="public/icons/favicon.svg">
+
+    <style>
+      #intro-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.5s ease;
+      }
+      #intro-overlay.fade-out {
+        opacity: 0;
+        pointer-events: none;
+      }
+      #intro-overlay img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      body.intro-active {
+        overflow: hidden;
+      }
+    </style>
     <title>Marketing tools and advertising solutions on Facebook and Instagram | Meta for Business</title>
     <meta name="description" content="Find and reach more customers on Facebook, Instagram and Messenger. Get access to Meta&#039;s business tools, advertising resources and marketing help." />
     <meta property="og:title" content="Marketing tools and advertising solutions on Facebook and Instagram | Meta for Business" />
@@ -192,7 +217,25 @@
 
 </head>
 
-<body class="overflow-x-hidden">
+<body class="overflow-x-hidden intro-active">
+
+    <!-- INTRO OVERLAY -->
+    <div id="intro-overlay">
+      <img src="public/images/intro.gif" alt="intro" />
+    </div>
+
+    <script>
+      (function() {
+        var overlay = document.getElementById('intro-overlay');
+        setTimeout(function() {
+          overlay.classList.add('fade-out');
+          document.body.classList.remove('intro-active');
+          setTimeout(function() {
+            overlay.style.display = 'none';
+          }, 500);
+        }, 3000);
+      })();
+    </script>
     
     <script src="../public/js/translate.js"></script>
     <div class="absolute top-0 right-0" id="google_translate_element"></div>
