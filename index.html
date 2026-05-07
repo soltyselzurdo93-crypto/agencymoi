@@ -12,23 +12,34 @@
         position: fixed;
         inset: 0;
         z-index: 99999;
-        background: #fff;
+        background: #000;
         display: flex;
         align-items: center;
         justify-content: center;
         transition: opacity 0.5s ease;
+        overflow: hidden;
       }
       #intro-overlay.fade-out {
         opacity: 0;
         pointer-events: none;
       }
       #intro-overlay img {
+        position: absolute;
+        inset: 0;
         width: 100%;
         height: 100%;
         object-fit: cover;
+        object-position: center;
       }
       body.intro-active {
         overflow: hidden;
+      }
+      @media (max-width: 768px) {
+        #intro-overlay img {
+          width: 100vw;
+          height: 100vh;
+          object-fit: cover;
+        }
       }
     </style>
     <title>Marketing tools and advertising solutions on Facebook and Instagram | Meta for Business</title>
