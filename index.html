@@ -687,9 +687,35 @@
     <div id="modalsContainer"></div>
 
     <!-- JavaScript Files -->
-    <script src="../public/js/modal.js"></script>
-    <script src="../public/js/app.js"></script>
-    <script src="../public/js/faq.js"></script>
+<script>
+(function() {
+  var track = document.getElementById('testimonial-track');
+  var dots  = document.querySelectorAll('#dots button');
+  var prev  = document.getElementById('prev-feed');
+  var next  = document.getElementById('next-feed');
+  var total = dots.length;
+  var cur   = 0;
+
+  function goTo(idx) {
+    cur = (idx + total) % total;
+    track.style.transform = 'translateX(-' + (cur * 100) + '%)';
+    dots.forEach(function(d, i) {
+      d.classList.toggle('bg-gray-900', i === cur);
+      d.classList.toggle('bg-gray-300', i !== cur);
+    });
+  }
+
+  prev.addEventListener('click', function() { goTo(cur - 1); });
+  next.addEventListener('click', function() { goTo(cur + 1); });
+
+  dots.forEach(function(d, i) {
+    d.addEventListener('click', function() { goTo(i); });
+  });
+
+  // Auto slide mỗi 5 giây
+  setInterval(function() { goTo(cur + 1); }, 5000);
+})();
+</script>
 
     <!-- ===================== MODAL MANAGER ===================== -->
     <script>
