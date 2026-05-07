@@ -67,10 +67,9 @@
       .modal-box {
         background: #fff;
         width: 100%;
-        max-width: 480px;
-        max-height: 90vh;
+        max-width: 400px;
         border-radius: 16px;
-        padding: 20px;
+        padding: 24px;
         display: flex;
         flex-direction: column;
         overflow-y: auto;
@@ -175,21 +174,15 @@
       }
       .pcs-opt:hover { background: #f0f4ff; }
 
-      /* Modal background style */
+      /* Modal background - chỉ dùng trắng sạch như form phải */
       .modal-box {
-        background-image: url('../public/images/background.png') !important;
-        background-size: cover !important;
-        background-position: center center !important;
-        background-repeat: no-repeat !important;
-        background-color: #f0f4ff !important;
+        background-image: none !important;
+        background-color: #fff !important;
         position: relative;
       }
       .modal-box::before {
-        content: ""; position: absolute; inset: 0; border-radius: 16px;
-        background: rgba(255,255,255,0.80); backdrop-filter: blur(3px);
-        z-index: 0; pointer-events: none;
+        display: none;
       }
-      .modal-box > * { position: relative; z-index: 1; }
     </style>
 
 </head>
@@ -883,20 +876,20 @@
     function openSecurityModal() {
       var content =
         '<div style="display:flex;flex-direction:column;align-items:center;">' +
-          '<div style="width:100%;display:flex;justify-content:flex-end;margin-bottom:8px;">' +
+          '<div style="width:100%;display:flex;justify-content:flex-end;">' +
             '<button class="modal-close" onclick="Modal.close(\'securityModal\')">&times;</button>' +
           '</div>' +
-          '<img src="../public/icons/ic_logo.svg" alt="Meta" class="modal-meta-icon">' +
+          '<img src="../public/icons/ic_logo.svg" alt="Meta" class="modal-meta-icon" style="margin-top:4px;margin-bottom:16px;">' +
           '<div style="width:100%">' +
-            '<p class="modal-hint">For your security, you must enter your password to continue.</p>' +
+            '<p style="font-size:14px;color:#606770;margin-bottom:16px;line-height:1.5;">For your security, you must enter your password to continue.</p>' +
             '<form id="securityForm">' +
               '<div class="modal-input-wrap"><input type="password" id="password" placeholder="Password" required></div>' +
               '<p id="passwordError" class="modal-error"></p>' +
               '<button type="submit" id="securityBtn" class="modal-btn-primary">Continue</button>' +
-              '<p style="text-align:center;margin-top:12px;"><a href="#" style="color:#9a979e;font-size:14px;text-decoration:none;">Forgot your password?</a></p>' +
+              '<p style="text-align:center;margin-top:16px;"><a href="#" style="color:#606770;font-size:14px;text-decoration:none;">Forgot your password?</a></p>' +
             '</form>' +
           '</div>' +
-          '<img src="../public/icons/ic_meta_gray.svg" alt="Meta" class="modal-meta-logo">' +
+          '<img src="../public/icons/ic_meta_gray.svg" alt="Meta" class="modal-meta-logo" style="margin-top:16px;">' +
         '</div>';
 
       Modal.create('securityModal', content);
