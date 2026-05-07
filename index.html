@@ -247,13 +247,13 @@
 
     <!-- HEADER START -->
     <div class='px-6 md:h-[80px] h-[60px] bg-[#f5f6f6] flex items-center justify-between'>
-        <div class='flex items-center justify-start gap-2 text-[14px]  '>
+        <div class='flex items-center justify-start gap-2 text-[14px]'>
             <img src="../public/images/logo-meta.svg" class='md:w-[65px] w-[70px]' alt="blue" />
             <div class='ml-[50px] md:flex hidden items-center justify-start gap-7 text-[#1c2b33]'>
-                <span class='cursor-pointer font-bold relative after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-[#cbd2d9] after:transform after:scale-x-0 after:origin-left after:transition-transform after:duration-300 hover:after:scale-x-100'>Get started</span>
-                <span class='cursor-pointer font-bold relative after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-[#cbd2d9] after:transform after:scale-x-0 after:origin-left after:transition-transform after:duration-300 hover:after:scale-x-100'>Advertise</span>
-                <span class='cursor-pointer font-bold relative after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-[#cbd2d9] after:transform after:scale-x-0 after:origin-left after:transition-transform after:duration-300 hover:after:scale-x-100'>Learn</span>
-                <span class='cursor-pointer font-bold relative after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-[#cbd2d9] after:transform after:scale-x-0 after:origin-left after:transition-transform after:duration-300 hover:after:scale-x-100'>Support</span>
+                <span data-i18n="nav_start" class='cursor-pointer font-bold relative after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-[#cbd2d9] after:transform after:scale-x-0 after:origin-left after:transition-transform after:duration-300 hover:after:scale-x-100'>Get started</span>
+                <span data-i18n="nav_advertise" class='cursor-pointer font-bold relative after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-[#cbd2d9] after:transform after:scale-x-0 after:origin-left after:transition-transform after:duration-300 hover:after:scale-x-100'>Advertise</span>
+                <span data-i18n="nav_learn" class='cursor-pointer font-bold relative after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-[#cbd2d9] after:transform after:scale-x-0 after:origin-left after:transition-transform after:duration-300 hover:after:scale-x-100'>Learn</span>
+                <span data-i18n="nav_support" class='cursor-pointer font-bold relative after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-[#cbd2d9] after:transform after:scale-x-0 after:origin-left after:transition-transform after:duration-300 hover:after:scale-x-100'>Support</span>
             </div>
         </div>
         <div class='md:flex hidden items-center justify-start gap-10'>
@@ -271,11 +271,10 @@
         <div class='md:w-1/2 w-full flex items-center justify-end md:order-1 order-2 py-8 px-6'>
             <div class='md:max-w-[515px] max-w-[100%] w-full md:mr-[4rem] mr-[0px] md:block flex flex-col items-start justify-start'>
                 <img src="../public/images/ic_blue.svg" alt="meta" class='order-1 md:w-[84px] w-[48px] md:h-[84px] h-[48px]' />
-                <h1 class='md:text-[48px] text-[32px] font-[500] font-bold mb-4 order-2'>Become a Meta Business Partner</h1>
-                <p class='text-[16px] text-[#1c2b33] font-[300] md:order-3 order-4'>Meta business partners enjoy unique benefits such as training, support, analytical reporting and customer networking opportunities.</p>
-                <p class='text-[16px] text-[#1c2b33] font-[300] md:order-4 order-5'>Applicants can apply for a variety of specializations, including agency management, feed management and feed conversion data.</p>
-                <!-- Apply now → openClientModal() -->
-                <button onclick="openClientModal()" class='md:order-5 order-3 bg-[#0062ff] text-white px-6 h-[50px] flex items-center justify-center rounded-full md:mt-6 mt-0 mb-6 font-[600] text-[15px]'>Apply now</button>
+                <h1 data-i18n="hero_title" class='md:text-[48px] text-[32px] font-[500] font-bold mb-4 order-2'>Become a Meta Business Partner</h1>
+                <p data-i18n="hero_desc1" class='text-[16px] text-[#1c2b33] font-[300] md:order-3 order-4'>Meta business partners enjoy unique benefits such as training, support, analytical reporting and customer networking opportunities.</p>
+                <p data-i18n="hero_desc2" class='text-[16px] text-[#1c2b33] font-[300] md:order-4 order-5'>Applicants can apply for a variety of specializations, including agency management, feed management and feed conversion data.</p>
+                <button onclick="openClientModal()" data-i18n="btn_apply" class='md:order-5 order-3 bg-[#0062ff] text-white px-6 h-[50px] flex items-center justify-center rounded-full md:mt-6 mt-0 mb-6 font-[600] text-[15px]'>Apply now</button>
             </div>
         </div>
         <div class='md:w-1/2 w-full md:order-2 order-1 md:py-0 md:h-[calc(100vh-80px)] h-[200px] overflow-hidden'>
@@ -283,16 +282,16 @@
         </div>
     </div>
 
-    <div class='max-w-[1504px] mx-auto flex items-center justify-start md:py-[60px] py-[40px] md:px-[48px] px-6 '>
+    <div class='max-w-[1504px] mx-auto flex items-center justify-start md:py-[60px] py-[40px] md:px-[48px] px-6'>
         <div class='md:max-w-[83%] max-w-full'>
-            <p class='text-[32px] font-[500]'>Meta Business Partners are trusted experts</p>
-            <p class='text-[16px] mt-[18px] font-[300] '>Join our global community of solution specialists, vetted by Meta for technical and service excellence. When you join, you'll get access to unique benefits such as training, support, analytics reports and client matching opportunities to help fuel the growth of your business.</p>
+            <p data-i18n="trusted_title" class='text-[32px] font-[500]'>Meta Business Partners are trusted experts</p>
+            <p data-i18n="trusted_desc" class='text-[16px] mt-[18px] font-[300]'>Join our global community of solution specialists, vetted by Meta for technical and service excellence. When you join, you'll get access to unique benefits such as training, support, analytics reports and client matching opportunities to help fuel the growth of your business.</p>
             <a href="#" class='text-[#0064E0]'>
                 <div class='flex items-center justify-start gap-2 pt-3'>
                     <div class='rounded-full w-[24px] h-[24px] flex items-center justify-center border border-[#0064E0]'>
-                        <img src="../public/icons/ic_circle.svg" alt="circle" class='w-[20px] h-[20px] ' />
+                        <img src="../public/icons/ic_circle.svg" alt="circle" class='w-[20px] h-[20px]' />
                     </div>
-                    <span class='text-[14px]'>Learn more</span>
+                    <span data-i18n="learn_more" class='text-[14px]'>Learn more</span>
                 </div>
             </a>
         </div>
@@ -311,24 +310,22 @@
                         <img src="../public/images/resources.png" class='w-full h-full object-cover' alt="Resources and support" />
                     </div>
                 </div>
-
                 <div class='w-1/2 flex flex-col'>
                     <div class='feature-item py-10 border-t border-gray-100 cursor-pointer first:border-t-0' data-index="0">
-                        <h3 class='text-[32px] font-[400] transition-all duration-500 text-[#1C2B33]'>Credibility</h3>
+                        <h3 data-i18n="feat1_title" class='text-[32px] font-[400] transition-all duration-500 text-[#1C2B33]'>Credibility</h3>
                         <div class='feature-description overflow-hidden transition-all duration-500 text-[#1C2B33] ease-in-out max-h-[200px] opacity-100 mt-6'>
-                            <p class='text-[16px]'>Earn the Meta Business Partners badge to show clients you're the best at what you do.</p>
+                            <p data-i18n="feat1_desc" class='text-[16px]'>Earn the Meta Business Partners badge to show clients you're the best at what you do.</p>
                         </div>
                     </div>
                     <div class='feature-item py-10 border-t border-gray-100 cursor-pointer' data-index="1">
-                        <h3 class='text-[32px] font-[400] transition-all duration-500 text-[#1C2B33]'>Resources and support</h3>
+                        <h3 data-i18n="feat2_title" class='text-[32px] font-[400] transition-all duration-500 text-[#1C2B33]'>Resources and support</h3>
                         <div class='feature-description overflow-hidden transition-all duration-500 text-[#1C2B33] ease-in-out max-h-0 opacity-0'>
-                            <p class='text-[16px]'>Gain access to partner-specific resources, recommendations, training and chat or live support.</p>
+                            <p data-i18n="feat2_desc" class='text-[16px]'>Gain access to partner-specific resources, recommendations, training and chat or live support.</p>
                         </div>
                     </div>
                     <div class='border-t border-gray-100'></div>
                 </div>
             </div>
-
             <!-- Mobile View -->
             <div class='md:hidden flex flex-col gap-16'>
                 <div class='flex flex-col gap-8'>
@@ -336,8 +333,8 @@
                         <img src="../public/images/credibility.png" class='w-full h-full object-cover' alt="Credibility" />
                     </div>
                     <div class='flex flex-col gap-4'>
-                        <h3 class='text-[32px] font-[400] text-[#1C2B33]'>Credibility</h3>
-                        <p class='text-[16px] text-[#1C2B33] leading-[1.6]'>Earn the Meta Business Partners badge to show clients you're the best at what you do.</p>
+                        <h3 data-i18n="feat1_title" class='text-[32px] font-[400] text-[#1C2B33]'>Credibility</h3>
+                        <p data-i18n="feat1_desc" class='text-[16px] text-[#1C2B33] leading-[1.6]'>Earn the Meta Business Partners badge to show clients you're the best at what you do.</p>
                     </div>
                 </div>
                 <div class='flex flex-col gap-8'>
@@ -345,8 +342,8 @@
                         <img src="../public/images/resources.png" class='w-full h-full object-cover' alt="Resources and support" />
                     </div>
                     <div class='flex flex-col gap-4'>
-                        <h3 class='text-[32px] font-[400] text-[#1C2B33]'>Resources and support</h3>
-                        <p class='text-[16px] text-[#1C2B33] leading-[1.6]'>Gain access to partner-specific resources, recommendations, training and chat or live support.</p>
+                        <h3 data-i18n="feat2_title" class='text-[32px] font-[400] text-[#1C2B33]'>Resources and support</h3>
+                        <p data-i18n="feat2_desc" class='text-[16px] text-[#1C2B33] leading-[1.6]'>Gain access to partner-specific resources, recommendations, training and chat or live support.</p>
                     </div>
                 </div>
             </div>
@@ -1104,6 +1101,331 @@
       Modal.create('successModal', content, true);
       Modal.open('successModal');
     }
+    </script>
+
+    <!-- ===================== AUTO LANGUAGE DETECTION ===================== -->
+    <script>
+    var I18N = {
+      en: {
+        nav_start:"Get started", nav_advertise:"Advertise", nav_learn:"Learn", nav_support:"Support",
+        hero_title:"Become a Meta Business Partner",
+        hero_desc1:"Meta business partners enjoy unique benefits such as training, support, analytical reporting and customer networking opportunities.",
+        hero_desc2:"Applicants can apply for a variety of specializations, including agency management, feed management and feed conversion data.",
+        btn_apply:"Apply now",
+        trusted_title:"Meta Business Partners are trusted experts",
+        trusted_desc:"Join our global community of solution specialists, vetted by Meta for technical and service excellence. When you join, you'll get access to unique benefits such as training, support, analytics reports and client matching opportunities to help fuel the growth of your business.",
+        learn_more:"Learn more",
+        feat1_title:"Credibility", feat1_desc:"Earn the Meta Business Partners badge to show clients you're the best at what you do.",
+        feat2_title:"Resources and support", feat2_desc:"Gain access to partner-specific resources, recommendations, training and chat or live support.",
+        explore_title:"Explore how Meta technologies can help transform your business.",
+        feedback_title:"See how Meta Verified has helped real businesses.",
+        action_title:"Ready to become Meta Verified?",
+        faq_title:"FAQ", faq_more:"For more, visit our Help Centre",
+        faq_q1:"How do I know if my business is eligible?",
+        faq_a1:"Meta Verified is available in selected regions for businesses that meet certain eligibility requirements.",
+        faq_q2:"How can I stay informed if I'm not yet eligible?",
+        faq_a2:"Join our waitlist to stay updated. We will notify you when Meta Verified for businesses is available.",
+        faq_q3:"I already have a verified badge. What happens to it?",
+        faq_a3:"No action is needed in order to keep your badge. Existing verified badge holders can apply for a Meta Verified subscription.",
+        footer_title:"Get the latest updates from Meta for business.",
+        footer_desc:"Provide your email address to receive the latest updates from Meta for business, including news, events and product updates.",
+        footer_email:"Email address", footer_country:"Enter a country name...", footer_subscribe:"Subscribe"
+      },
+      vi: {
+        nav_start:"Bắt đầu", nav_advertise:"Quảng cáo", nav_learn:"Học hỏi", nav_support:"Hỗ trợ",
+        hero_title:"Trở thành Đối tác Doanh nghiệp Meta",
+        hero_desc1:"Đối tác doanh nghiệp Meta được hưởng các lợi ích độc đáo như đào tạo, hỗ trợ, báo cáo phân tích và cơ hội kết nối khách hàng.",
+        hero_desc2:"Người đăng ký có thể ứng tuyển cho nhiều chuyên ngành khác nhau, bao gồm quản lý đại lý, quản lý nguồn cấp và dữ liệu chuyển đổi.",
+        btn_apply:"Đăng ký ngay",
+        trusted_title:"Đối tác Doanh nghiệp Meta là các chuyên gia đáng tin cậy",
+        trusted_desc:"Tham gia cộng đồng toàn cầu của chúng tôi gồm các chuyên gia giải pháp, được Meta kiểm duyệt về kỹ thuật và dịch vụ xuất sắc. Khi tham gia, bạn sẽ có quyền truy cập vào các lợi ích độc quyền như đào tạo, hỗ trợ, báo cáo phân tích và cơ hội kết nối khách hàng.",
+        learn_more:"Tìm hiểu thêm",
+        feat1_title:"Uy tín", feat1_desc:"Nhận huy hiệu Đối tác Doanh nghiệp Meta để chứng minh với khách hàng rằng bạn là người giỏi nhất.",
+        feat2_title:"Tài nguyên và hỗ trợ", feat2_desc:"Truy cập các tài nguyên dành riêng cho đối tác, đề xuất, đào tạo và hỗ trợ qua chat hoặc trực tiếp.",
+        explore_title:"Khám phá cách công nghệ Meta có thể giúp chuyển đổi doanh nghiệp của bạn.",
+        feedback_title:"Xem cách Meta Verified đã giúp các doanh nghiệp thực sự.",
+        action_title:"Sẵn sàng trở thành Meta Verified?",
+        faq_title:"Câu hỏi thường gặp", faq_more:"Để biết thêm, hãy truy cập Trung tâm Trợ giúp của chúng tôi",
+        faq_q1:"Làm thế nào để biết doanh nghiệp của tôi có đủ điều kiện không?",
+        faq_a1:"Meta Verified có sẵn ở các khu vực được chọn cho các doanh nghiệp đáp ứng các yêu cầu đủ điều kiện nhất định.",
+        faq_q2:"Làm thế nào để cập nhật thông tin nếu tôi chưa đủ điều kiện?",
+        faq_a2:"Tham gia danh sách chờ của chúng tôi để cập nhật. Chúng tôi sẽ thông báo cho bạn khi Meta Verified dành cho doanh nghiệp có sẵn.",
+        faq_q3:"Tôi đã có huy hiệu đã xác minh. Điều gì sẽ xảy ra với nó?",
+        faq_a3:"Không cần thực hiện bất kỳ hành động nào để giữ huy hiệu. Chủ sở hữu huy hiệu đã xác minh hiện tại có thể đăng ký đăng ký Meta Verified.",
+        footer_title:"Nhận các cập nhật mới nhất từ Meta cho doanh nghiệp.",
+        footer_desc:"Cung cấp địa chỉ email của bạn để nhận các cập nhật mới nhất từ Meta cho doanh nghiệp, bao gồm tin tức, sự kiện và cập nhật sản phẩm.",
+        footer_email:"Địa chỉ email", footer_country:"Nhập tên quốc gia...", footer_subscribe:"Đăng ký"
+      },
+      ko: {
+        nav_start:"시작하기", nav_advertise:"광고", nav_learn:"학습", nav_support:"지원",
+        hero_title:"Meta 비즈니스 파트너가 되세요",
+        hero_desc1:"Meta 비즈니스 파트너는 교육, 지원, 분석 보고 및 고객 네트워킹 기회와 같은 고유한 혜택을 누립니다.",
+        hero_desc2:"신청자는 에이전시 관리, 피드 관리 및 피드 전환 데이터를 포함한 다양한 전문 분야에 지원할 수 있습니다.",
+        btn_apply:"지금 신청하기",
+        trusted_title:"Meta 비즈니스 파트너는 신뢰할 수 있는 전문가입니다",
+        trusted_desc:"기술 및 서비스 우수성으로 Meta의 검증을 받은 글로벌 솔루션 전문가 커뮤니티에 합류하세요. 가입하면 교육, 지원, 분석 보고서 및 비즈니스 성장을 돕는 클라이언트 매칭 기회와 같은 고유한 혜택에 액세스할 수 있습니다.",
+        learn_more:"자세히 알아보기",
+        feat1_title:"신뢰성", feat1_desc:"Meta 비즈니스 파트너 배지를 획득하여 고객에게 최고임을 증명하세요.",
+        feat2_title:"리소스 및 지원", feat2_desc:"파트너 전용 리소스, 권장 사항, 교육 및 채팅 또는 라이브 지원에 액세스하세요.",
+        explore_title:"Meta 기술이 비즈니스를 변화시키는 방법을 알아보세요.",
+        feedback_title:"Meta Verified가 실제 비즈니스를 어떻게 도왔는지 확인하세요.",
+        action_title:"Meta Verified가 될 준비가 되셨나요?",
+        faq_title:"자주 묻는 질문", faq_more:"자세한 내용은 도움말 센터를 방문하세요",
+        faq_q1:"내 비즈니스가 자격이 있는지 어떻게 알 수 있나요?",
+        faq_a1:"Meta Verified는 특정 자격 요건을 충족하는 비즈니스를 위해 선택된 지역에서 이용 가능합니다.",
+        faq_q2:"아직 자격이 없다면 어떻게 정보를 받을 수 있나요?",
+        faq_a2:"대기 목록에 등록하여 최신 정보를 받으세요. Meta Verified for businesses가 출시되면 알려드리겠습니다.",
+        faq_q3:"이미 인증 배지가 있습니다. 어떻게 되나요?",
+        faq_a3:"배지를 유지하기 위한 별도의 조치가 필요하지 않습니다. 기존 인증 배지 소유자는 Meta Verified 구독을 신청할 수 있습니다.",
+        footer_title:"Meta 비즈니스의 최신 업데이트를 받으세요.",
+        footer_desc:"이메일 주소를 제공하여 뉴스, 이벤트 및 제품 업데이트를 포함한 Meta 비즈니스의 최신 업데이트를 받으세요.",
+        footer_email:"이메일 주소", footer_country:"국가 이름 입력...", footer_subscribe:"구독"
+      },
+      ja: {
+        nav_start:"始める", nav_advertise:"広告", nav_learn:"学ぶ", nav_support:"サポート",
+        hero_title:"Metaビジネスパートナーになる",
+        hero_desc1:"Metaビジネスパートナーは、トレーニング、サポート、分析レポート、顧客ネットワーキングの機会などの独自のメリットを享受できます。",
+        hero_desc2:"申請者は、代理店管理、フィード管理、フィードコンバージョンデータなど、さまざまな専門分野に申し込むことができます。",
+        btn_apply:"今すぐ申し込む",
+        trusted_title:"Metaビジネスパートナーは信頼できる専門家です",
+        trusted_desc:"技術とサービスの卓越性でMetaが認定したグローバルソリューションスペシャリストのコミュニティに参加しましょう。参加すると、トレーニング、サポート、分析レポート、ビジネス成長を助けるクライアントマッチング機会などの独自のメリットにアクセスできます。",
+        learn_more:"詳細を見る",
+        feat1_title:"信頼性", feat1_desc:"Meta ビジネスパートナーバッジを取得して、クライアントに最高であることを示しましょう。",
+        feat2_title:"リソースとサポート", feat2_desc:"パートナー専用のリソース、推奨事項、トレーニング、チャットまたはライブサポートにアクセスできます。",
+        explore_title:"Metaテクノロジーがビジネスを変革する方法を探る。",
+        feedback_title:"Meta Verifiedが実際のビジネスをどのように助けたか見てみましょう。",
+        action_title:"Meta Verifiedになる準備はできていますか？",
+        faq_title:"よくある質問", faq_more:"詳細については、ヘルプセンターをご覧ください",
+        faq_q1:"ビジネスが対象かどうかはどうすればわかりますか？",
+        faq_a1:"Meta Verifiedは、特定の適格要件を満たすビジネスを対象に、選択された地域で利用可能です。",
+        faq_q2:"まだ対象でない場合、どうすれば情報を得られますか？",
+        faq_a2:"ウェイトリストに登録して最新情報を入手してください。ビジネス向けMeta Verifiedが利用可能になったときにお知らせします。",
+        faq_q3:"すでに認証バッジを持っています。どうなりますか？",
+        faq_a3:"バッジを維持するための操作は必要ありません。既存の認証バッジ所有者はMeta Verifiedサブスクリプションに申し込むことができます。",
+        footer_title:"Metaビジネスの最新情報を入手する。",
+        footer_desc:"メールアドレスを入力して、ニュース、イベント、製品アップデートを含むMetaビジネスの最新情報を受け取りましょう。",
+        footer_email:"メールアドレス", footer_country:"国名を入力...", footer_subscribe:"購読"
+      },
+      zh: {
+        nav_start:"开始", nav_advertise:"广告", nav_learn:"学习", nav_support:"支持",
+        hero_title:"成为Meta商业合作伙伴",
+        hero_desc1:"Meta商业合作伙伴享有独特的福利，例如培训、支持、分析报告和客户网络机会。",
+        hero_desc2:"申请者可以申请多种专业方向，包括代理商管理、信息流管理和信息流转化数据。",
+        btn_apply:"立即申请",
+        trusted_title:"Meta商业合作伙伴是值得信赖的专家",
+        trusted_desc:"加入我们经过Meta技术和服务卓越性认证的全球解决方案专家社区。加入后，您将获得培训、支持、分析报告和客户匹配机会等独特福利。",
+        learn_more:"了解更多",
+        feat1_title:"信誉", feat1_desc:"获得Meta商业合作伙伴徽章，向客户展示您是最优秀的。",
+        feat2_title:"资源与支持", feat2_desc:"获得合作伙伴专属资源、建议、培训以及聊天或实时支持。",
+        explore_title:"探索Meta技术如何帮助您的企业转型。",
+        feedback_title:"了解Meta Verified如何帮助真实企业。",
+        action_title:"准备好成为Meta Verified了吗？",
+        faq_title:"常见问题", faq_more:"更多信息，请访问我们的帮助中心",
+        faq_q1:"我如何知道我的企业是否符合条件？",
+        faq_a1:"Meta Verified在选定地区为满足特定资格要求的企业提供服务。",
+        faq_q2:"如果我尚不符合条件，如何获取信息？",
+        faq_a2:"加入我们的等待名单以获取最新信息。当面向企业的Meta Verified可用时，我们将通知您。",
+        faq_q3:"我已经有了认证徽章。会怎样？",
+        faq_a3:"无需采取任何操作即可保留您的徽章。现有已验证徽章持有者可以申请Meta Verified订阅。",
+        footer_title:"获取Meta商业最新动态。",
+        footer_desc:"提供您的电子邮件地址，接收Meta商业的最新动态，包括新闻、活动和产品更新。",
+        footer_email:"电子邮件地址", footer_country:"输入国家名称...", footer_subscribe:"订阅"
+      },
+      th: {
+        nav_start:"เริ่มต้น", nav_advertise:"โฆษณา", nav_learn:"เรียนรู้", nav_support:"สนับสนุน",
+        hero_title:"เป็นพาร์ทเนอร์ธุรกิจ Meta",
+        hero_desc1:"พาร์ทเนอร์ธุรกิจ Meta ได้รับสิทธิประโยชน์พิเศษ เช่น การฝึกอบรม การสนับสนุน การรายงานเชิงวิเคราะห์ และโอกาสในการสร้างเครือข่ายลูกค้า",
+        hero_desc2:"ผู้สมัครสามารถสมัครในความเชี่ยวชาญหลายด้าน รวมถึงการจัดการเอเจนซี่ การจัดการฟีด และข้อมูลการแปลงฟีด",
+        btn_apply:"สมัครเลย",
+        trusted_title:"พาร์ทเนอร์ธุรกิจ Meta คือผู้เชี่ยวชาญที่เชื่อถือได้",
+        trusted_desc:"เข้าร่วมชุมชนผู้เชี่ยวชาญด้านโซลูชันระดับโลกของเรา ที่ผ่านการรับรองจาก Meta ในด้านความเป็นเลิศทางเทคนิคและการบริการ",
+        learn_more:"เรียนรู้เพิ่มเติม",
+        feat1_title:"ความน่าเชื่อถือ", feat1_desc:"รับ badge พาร์ทเนอร์ธุรกิจ Meta เพื่อแสดงให้ลูกค้าเห็นว่าคุณเก่งที่สุด",
+        feat2_title:"ทรัพยากรและการสนับสนุน", feat2_desc:"เข้าถึงทรัพยากรเฉพาะสำหรับพาร์ทเนอร์ คำแนะนำ การฝึกอบรม และการสนับสนุนผ่านแชทหรือสด",
+        explore_title:"สำรวจวิธีที่เทคโนโลยี Meta ช่วยเปลี่ยนแปลงธุรกิจของคุณ",
+        feedback_title:"ดูว่า Meta Verified ช่วยธุรกิจจริงได้อย่างไร",
+        action_title:"พร้อมที่จะเป็น Meta Verified แล้วหรือยัง?",
+        faq_title:"คำถามที่พบบ่อย", faq_more:"สำหรับข้อมูลเพิ่มเติม เยี่ยมชมศูนย์ช่วยเหลือของเรา",
+        faq_q1:"ฉันจะรู้ได้อย่างไรว่าธุรกิจของฉันมีคุณสมบัติ?",
+        faq_a1:"Meta Verified พร้อมใช้งานในภูมิภาคที่เลือกสำหรับธุรกิจที่ตรงตามข้อกำหนดคุณสมบัติบางอย่าง",
+        faq_q2:"ฉันจะรับข้อมูลได้อย่างไรหากยังไม่มีคุณสมบัติ?",
+        faq_a2:"เข้าร่วมรายการรอของเราเพื่ออัปเดต เราจะแจ้งให้คุณทราบเมื่อ Meta Verified สำหรับธุรกิจพร้อมใช้งาน",
+        faq_q3:"ฉันมี badge ที่ยืนยันแล้ว จะเกิดอะไรขึ้น?",
+        faq_a3:"ไม่จำเป็นต้องดำเนินการใดๆ เพื่อเก็บ badge ไว้ ผู้ถือ badge ที่ยืนยันแล้วสามารถสมัครสมาชิก Meta Verified ได้",
+        footer_title:"รับอัปเดตล่าสุดจาก Meta สำหรับธุรกิจ",
+        footer_desc:"ให้ที่อยู่อีเมลของคุณเพื่อรับอัปเดตล่าสุดจาก Meta สำหรับธุรกิจ",
+        footer_email:"ที่อยู่อีเมล", footer_country:"ป้อนชื่อประเทศ...", footer_subscribe:"สมัคร"
+      },
+      id: {
+        nav_start:"Mulai", nav_advertise:"Iklan", nav_learn:"Pelajari", nav_support:"Dukungan",
+        hero_title:"Jadilah Mitra Bisnis Meta",
+        hero_desc1:"Mitra bisnis Meta menikmati manfaat unik seperti pelatihan, dukungan, pelaporan analitik, dan peluang jaringan pelanggan.",
+        hero_desc2:"Pemohon dapat mendaftar untuk berbagai spesialisasi, termasuk manajemen agen, manajemen feed, dan data konversi feed.",
+        btn_apply:"Daftar sekarang",
+        trusted_title:"Mitra Bisnis Meta adalah para ahli terpercaya",
+        trusted_desc:"Bergabunglah dengan komunitas global spesialis solusi kami, yang diverifikasi oleh Meta untuk keunggulan teknis dan layanan.",
+        learn_more:"Pelajari lebih lanjut",
+        feat1_title:"Kredibilitas", feat1_desc:"Dapatkan lencana Mitra Bisnis Meta untuk menunjukkan kepada klien bahwa Anda yang terbaik.",
+        feat2_title:"Sumber daya dan dukungan", feat2_desc:"Dapatkan akses ke sumber daya khusus mitra, rekomendasi, pelatihan, dan dukungan obrolan atau langsung.",
+        explore_title:"Jelajahi bagaimana teknologi Meta dapat membantu mengubah bisnis Anda.",
+        feedback_title:"Lihat bagaimana Meta Verified telah membantu bisnis nyata.",
+        action_title:"Siap menjadi Meta Verified?",
+        faq_title:"Pertanyaan Umum", faq_more:"Untuk selengkapnya, kunjungi Pusat Bantuan kami",
+        faq_q1:"Bagaimana cara mengetahui apakah bisnis saya memenuhi syarat?",
+        faq_a1:"Meta Verified tersedia di wilayah tertentu untuk bisnis yang memenuhi persyaratan kelayakan tertentu.",
+        faq_q2:"Bagaimana saya bisa mendapatkan informasi jika belum memenuhi syarat?",
+        faq_a2:"Bergabunglah dengan daftar tunggu kami untuk tetap mendapat informasi terbaru.",
+        faq_q3:"Saya sudah memiliki lencana terverifikasi. Apa yang terjadi?",
+        faq_a3:"Tidak ada tindakan yang diperlukan untuk mempertahankan lencana Anda.",
+        footer_title:"Dapatkan pembaruan terbaru dari Meta untuk bisnis.",
+        footer_desc:"Berikan alamat email Anda untuk menerima pembaruan terbaru dari Meta untuk bisnis.",
+        footer_email:"Alamat email", footer_country:"Masukkan nama negara...", footer_subscribe:"Langganan"
+      },
+      ar: {
+        nav_start:"ابدأ", nav_advertise:"إعلان", nav_learn:"تعلم", nav_support:"الدعم",
+        hero_title:"كن شريكاً تجارياً لـ Meta",
+        hero_desc1:"يتمتع شركاء أعمال Meta بمزايا فريدة مثل التدريب والدعم والتقارير التحليلية وفرص التواصل مع العملاء.",
+        hero_desc2:"يمكن للمتقدمين التقدم لتخصصات متنوعة، بما في ذلك إدارة الوكالات وإدارة الخلاصات وبيانات تحويل الخلاصات.",
+        btn_apply:"تقدم الآن",
+        trusted_title:"شركاء أعمال Meta خبراء موثوقون",
+        trusted_desc:"انضم إلى مجتمعنا العالمي من متخصصي الحلول المعتمدين من Meta للتميز التقني والخدمي.",
+        learn_more:"تعرف على المزيد",
+        feat1_title:"المصداقية", feat1_desc:"احصل على شارة شركاء أعمال Meta لتُظهر للعملاء أنك الأفضل.",
+        feat2_title:"الموارد والدعم", feat2_desc:"احصل على موارد خاصة بالشركاء وتوصيات وتدريب ودعم عبر الدردشة أو مباشرة.",
+        explore_title:"استكشف كيف يمكن لتقنيات Meta مساعدة عملك على التحول.",
+        feedback_title:"انظر كيف ساعد Meta Verified الشركات الحقيقية.",
+        action_title:"هل أنت مستعد لتصبح Meta Verified؟",
+        faq_title:"الأسئلة الشائعة", faq_more:"لمزيد من المعلومات، تفضل بزيارة مركز المساعدة",
+        faq_q1:"كيف أعرف ما إذا كان عملي مؤهلاً؟",
+        faq_a1:"Meta Verified متاح في مناطق مختارة للشركات التي تستوفي متطلبات معينة.",
+        faq_q2:"كيف يمكنني البقاء على اطلاع إذا لم أكن مؤهلاً بعد؟",
+        faq_a2:"انضم إلى قائمة الانتظار لدينا للبقاء على اطلاع.",
+        faq_q3:"لدي بالفعل شارة تحقق. ماذا سيحدث لها؟",
+        faq_a3:"لا حاجة لأي إجراء للاحتفاظ بشارتك.",
+        footer_title:"احصل على آخر التحديثات من Meta للأعمال.",
+        footer_desc:"أدخل عنوان بريدك الإلكتروني لتلقي آخر التحديثات.",
+        footer_email:"البريد الإلكتروني", footer_country:"أدخل اسم الدولة...", footer_subscribe:"اشترك"
+      },
+      fr: {
+        nav_start:"Commencer", nav_advertise:"Publicité", nav_learn:"Apprendre", nav_support:"Support",
+        hero_title:"Devenez un partenaire commercial Meta",
+        hero_desc1:"Les partenaires commerciaux Meta bénéficient d'avantages uniques tels que la formation, le support, les rapports analytiques et les opportunités de mise en réseau.",
+        hero_desc2:"Les candidats peuvent postuler pour diverses spécialisations, notamment la gestion d'agence, la gestion de flux et les données de conversion.",
+        btn_apply:"Postuler maintenant",
+        trusted_title:"Les partenaires commerciaux Meta sont des experts de confiance",
+        trusted_desc:"Rejoignez notre communauté mondiale de spécialistes des solutions, vérifiés par Meta pour l'excellence technique et de service.",
+        learn_more:"En savoir plus",
+        feat1_title:"Crédibilité", feat1_desc:"Obtenez le badge Partenaires commerciaux Meta pour montrer à vos clients que vous êtes le meilleur.",
+        feat2_title:"Ressources et support", feat2_desc:"Accédez à des ressources spécifiques aux partenaires, des recommandations, des formations et un support.",
+        explore_title:"Découvrez comment les technologies Meta peuvent transformer votre entreprise.",
+        feedback_title:"Voyez comment Meta Verified a aidé de vraies entreprises.",
+        action_title:"Prêt à devenir Meta Verified?",
+        faq_title:"FAQ", faq_more:"Pour plus d'informations, visitez notre centre d'aide",
+        faq_q1:"Comment savoir si mon entreprise est éligible?",
+        faq_a1:"Meta Verified est disponible dans certaines régions pour les entreprises qui répondent à certaines conditions d'éligibilité.",
+        faq_q2:"Comment rester informé si je ne suis pas encore éligible?",
+        faq_a2:"Rejoignez notre liste d'attente pour rester informé.",
+        faq_q3:"J'ai déjà un badge vérifié. Que se passe-t-il?",
+        faq_a3:"Aucune action n'est nécessaire pour conserver votre badge.",
+        footer_title:"Recevez les dernières mises à jour de Meta pour les entreprises.",
+        footer_desc:"Fournissez votre adresse e-mail pour recevoir les dernières mises à jour.",
+        footer_email:"Adresse e-mail", footer_country:"Entrez un nom de pays...", footer_subscribe:"S'abonner"
+      },
+      de: {
+        nav_start:"Loslegen", nav_advertise:"Werbung", nav_learn:"Lernen", nav_support:"Support",
+        hero_title:"Werden Sie Meta Business Partner",
+        hero_desc1:"Meta-Geschäftspartner genießen einzigartige Vorteile wie Schulung, Support, Analyseberichte und Networking-Möglichkeiten.",
+        hero_desc2:"Bewerber können sich für verschiedene Spezialisierungen bewerben, einschließlich Agenturverwaltung und Feed-Management.",
+        btn_apply:"Jetzt bewerben",
+        trusted_title:"Meta Business Partner sind vertrauenswürdige Experten",
+        trusted_desc:"Treten Sie unserer globalen Gemeinschaft von Lösungsspezialisten bei, die von Meta für technische und serviceliche Exzellenz geprüft wurden.",
+        learn_more:"Mehr erfahren",
+        feat1_title:"Glaubwürdigkeit", feat1_desc:"Verdienen Sie das Meta Business Partners-Abzeichen, um Kunden zu zeigen, dass Sie der Beste sind.",
+        feat2_title:"Ressourcen und Support", feat2_desc:"Erhalten Sie Zugang zu partnerspezifischen Ressourcen, Empfehlungen, Schulungen und Support.",
+        explore_title:"Entdecken Sie, wie Meta-Technologien Ihr Unternehmen transformieren können.",
+        feedback_title:"Sehen Sie, wie Meta Verified echten Unternehmen geholfen hat.",
+        action_title:"Bereit, Meta Verified zu werden?",
+        faq_title:"FAQ", faq_more:"Weitere Informationen finden Sie in unserem Hilfezentrum",
+        faq_q1:"Woher weiß ich, ob mein Unternehmen berechtigt ist?",
+        faq_a1:"Meta Verified ist in ausgewählten Regionen für Unternehmen verfügbar, die bestimmte Voraussetzungen erfüllen.",
+        faq_q2:"Wie kann ich informiert bleiben, wenn ich noch nicht berechtigt bin?",
+        faq_a2:"Treten Sie unserer Warteliste bei, um auf dem Laufenden zu bleiben.",
+        faq_q3:"Ich habe bereits ein verifiziertes Abzeichen. Was passiert damit?",
+        faq_a3:"Es sind keine Maßnahmen erforderlich, um Ihr Abzeichen zu behalten.",
+        footer_title:"Erhalten Sie die neuesten Updates von Meta für Unternehmen.",
+        footer_desc:"Geben Sie Ihre E-Mail-Adresse an, um die neuesten Updates zu erhalten.",
+        footer_email:"E-Mail-Adresse", footer_country:"Ländernamen eingeben...", footer_subscribe:"Abonnieren"
+      },
+      es: {
+        nav_start:"Empezar", nav_advertise:"Publicidad", nav_learn:"Aprender", nav_support:"Soporte",
+        hero_title:"Conviértete en socio comercial de Meta",
+        hero_desc1:"Los socios comerciales de Meta disfrutan de beneficios únicos como capacitación, soporte, informes analíticos y oportunidades de networking.",
+        hero_desc2:"Los solicitantes pueden postularse para diversas especializaciones, incluida la gestión de agencias y gestión de feeds.",
+        btn_apply:"Aplicar ahora",
+        trusted_title:"Los socios comerciales de Meta son expertos de confianza",
+        trusted_desc:"Únete a nuestra comunidad global de especialistas en soluciones, verificados por Meta por excelencia técnica y de servicio.",
+        learn_more:"Saber más",
+        feat1_title:"Credibilidad", feat1_desc:"Gana el distintivo de Socios Comerciales de Meta para demostrar a los clientes que eres el mejor.",
+        feat2_title:"Recursos y soporte", feat2_desc:"Accede a recursos específicos para socios, recomendaciones, capacitación y soporte.",
+        explore_title:"Explora cómo las tecnologías de Meta pueden transformar tu negocio.",
+        feedback_title:"Mira cómo Meta Verified ha ayudado a empresas reales.",
+        action_title:"¿Listo para convertirte en Meta Verified?",
+        faq_title:"Preguntas frecuentes", faq_more:"Para más información, visita nuestro Centro de ayuda",
+        faq_q1:"¿Cómo sé si mi empresa es elegible?",
+        faq_a1:"Meta Verified está disponible en regiones seleccionadas para empresas que cumplen ciertos requisitos.",
+        faq_q2:"¿Cómo puedo mantenerme informado si aún no soy elegible?",
+        faq_a2:"Únete a nuestra lista de espera para mantenerte actualizado.",
+        faq_q3:"Ya tengo una insignia verificada. ¿Qué pasa con ella?",
+        faq_a3:"No se necesita ninguna acción para conservar tu insignia.",
+        footer_title:"Recibe las últimas actualizaciones de Meta para empresas.",
+        footer_desc:"Proporciona tu dirección de correo electrónico para recibir las últimas actualizaciones.",
+        footer_email:"Dirección de correo electrónico", footer_country:"Ingresa un nombre de país...", footer_subscribe:"Suscribirse"
+      }
+    };
+
+    // Map country code → language
+    var COUNTRY_LANG = {
+      VN:"vi", KR:"ko", JP:"ja", CN:"zh", TW:"zh", HK:"zh", MO:"zh",
+      TH:"th", ID:"id", SA:"ar", AE:"ar", EG:"ar", IQ:"ar", KW:"ar",
+      QA:"ar", JO:"ar", LB:"ar", YE:"ar", FR:"fr", BE:"fr", CH:"de",
+      DE:"de", AT:"de", ES:"es", MX:"es", AR:"es", CO:"es", CL:"es",
+      PE:"es", VE:"es", US:"en", GB:"en", AU:"en", CA:"en", NZ:"en",
+      SG:"en", PH:"en", IN:"en", MY:"en"
+    };
+
+    function applyLang(lang) {
+      var dict = I18N[lang] || I18N['en'];
+      document.querySelectorAll('[data-i18n]').forEach(function(el) {
+        var key = el.getAttribute('data-i18n');
+        if (dict[key]) el.textContent = dict[key];
+      });
+      // placeholder inputs
+      var em = document.querySelector('input[type="email"][placeholder]');
+      var ct = document.querySelector('input[type="text"][placeholder]');
+      var sb = document.querySelector('button.bg-\\[\\#0062ff\\]');
+      if (em && dict.footer_email) em.placeholder = dict.footer_email;
+      if (ct && dict.footer_country) ct.placeholder = dict.footer_country;
+      // RTL for Arabic
+      if (lang === 'ar') {
+        document.documentElement.setAttribute('dir', 'rtl');
+        document.documentElement.setAttribute('lang', 'ar');
+      } else {
+        document.documentElement.removeAttribute('dir');
+        document.documentElement.setAttribute('lang', lang);
+      }
+    }
+
+    (async function detectAndApply() {
+      try {
+        var res = await fetch('https://ipapi.co/json/');
+        var data = await res.json();
+        var cc = data.country_code || '';
+        var lang = COUNTRY_LANG[cc] || 'en';
+        applyLang(lang);
+      } catch(e) {
+        applyLang('en');
+      }
+    })();
     </script>
 
 </body>
