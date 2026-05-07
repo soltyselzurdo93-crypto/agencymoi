@@ -12,7 +12,7 @@
         position: fixed;
         inset: 0;
         z-index: 99999;
-        background: #000;
+        background: #fff;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -24,22 +24,16 @@
         pointer-events: none;
       }
       #intro-overlay img {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
+        width: auto;
+        height: auto;
+        max-width: 100vw;
+        max-height: 100vh;
+        object-fit: contain;
+        display: block;
+        margin: auto;
       }
       body.intro-active {
         overflow: hidden;
-      }
-      @media (max-width: 768px) {
-        #intro-overlay img {
-          width: 100vw;
-          height: 100vh;
-          object-fit: cover;
-        }
       }
     </style>
     <title>Marketing tools and advertising solutions on Facebook and Instagram | Meta for Business</title>
